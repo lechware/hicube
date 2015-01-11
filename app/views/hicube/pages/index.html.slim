@@ -1,0 +1,25 @@
+section.content
+  .row
+    .col-md-12
+      .box
+        .box-header
+          h3.box-title
+            | Pages
+        .box-body.table-responsive
+          table#page-table.table.table-bordered.table-striped
+            thead
+              tr
+                th
+                  .col-md-11
+                    = Hicube::Page.human_attribute_name(:title)
+                  .col-md-1
+                  
+            tbody
+              - @pages.each do |p|
+                tr
+                  td
+                    .col-md-11
+                      = p.title
+                    .col-md-1
+                      = link_to t('edit'), edit_page_path(p), class: 'btn btn-sm btn-primary'
+            

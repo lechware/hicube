@@ -1,0 +1,18 @@
+.box-body
+  .form-group
+    = f.label :title
+    = f.text_field :title, placeholder: 'Enter ...', class: 'form-control'
+  
+  .form-group
+    = f.label :body
+    / = f.text_area :body, placeholder: 'Enter ...', rows: "10", class: 'wmd-input form-control'
+    .wmd-panel
+      #wmd-button-bar
+      = f.text_area :body, id: "wmd-input", rows: "20", class: 'wmd-input form-control'
+    #wmd-preview.wmd-panel.wmd-preview
+.box-footer
+  button.btn.btn-primary[type="submit"]
+    | Submit 
+
+
+

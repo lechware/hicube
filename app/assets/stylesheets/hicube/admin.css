@@ -1,0 +1,12 @@
+/*
+ *= require twitter/bootstrap
+ *= require font-awesome
+ *= require admin-lte 
+ *= require pagedown_bootstrap
+ * require datatables/dataTables.bootstrap
+ *= require_tree ./admin
+ */ 
+
+.btn-spacer {
+  margin-left: 5px;
+}

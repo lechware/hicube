@@ -1,0 +1,49 @@
+section.sidebar
+  .user-panel
+    .pull-left.image
+      = image_tag "hicube/avatar.png", alt: "User Image", class: 'img-circle'
+    .pull-left.info
+      p
+        | Hello, #{current_user.name}
+      / a[href="#"]
+      /   i.fa.fa-circle.text-success
+      /   |  Online
+  / form.sidebar-form[action="#" method="get"]
+  /   .input-group
+  /     input.form-control[type="text" name="q" placeholder="Search..."]
+  /     span.input-group-btn
+  /       button#search-btn.btn.btn-flat[type="submit" name="search"]
+  /         i.fa.fa-search
+  ul.sidebar-menu
+    li class=active?([pages_path])
+      = link_to pages_path
+        i.fa.fa-dashboard
+        span
+          | Dashboard
+        small.badge.pull-right.bg-green
+          | new
+    / li class=active?([admin_orders_path])
+    /   a href=admin_orders_path
+    /     i.fa.fa-bar-chart-o
+    /     span
+    /       | Orders
+    li.treeview class=active?([pages_path, new_page_path])
+      a href="#"
+        i.fa.fa-laptop
+        span
+          = t 'pages'
+        i.fa.fa-angle-left.pull-right
+      ul.treeview-menu
+        li class=active?([pages_path])
+          a href=pages_path 
+            i.fa.fa-angle-double-right
+            |  List
+        li class=active?([new_page_path])
+          a href=new_page_path
+            i.fa.fa-angle-double-right
+            |  New
+    / li.treeview
+    /   a href="#"
+    /     i.fa.fa-edit
+    /     span
+    /       | Inventory
