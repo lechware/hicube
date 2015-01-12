@@ -37,7 +37,7 @@ module Hicube
     public
 
     def after_sign_in_path_for(resource)
-      return request.env['omniauth.origin'] || stored_location_for(resource) || hicube_pages_path
+      return request.env['omniauth.origin'] || stored_location_for(resource) || '/hicube/pages'
     end
 
     # Generate a notification message.
