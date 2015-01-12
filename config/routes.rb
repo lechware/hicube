@@ -1,6 +1,6 @@
 Hicube::Engine.routes.draw do
   
-  # root 'pages#show'
+  root 'hicube/pages#show'
 
   devise_for :users,
     class_name: 'Hicube::User',
