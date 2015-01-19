@@ -53,8 +53,12 @@ Gem::Specification.new do |s|
   # Mongoid
   s.add_dependency "mongoid"
 
+  # To generate page names in paths
   s.add_dependency "mongoid-slug"
-  
+
+  # For migrations
+  s.add_dependency "mongoid_rails_migrations"
+
   # Pagedown - markup editor used by Stackoverflow
   s.add_dependency "pagedown-bootstrap-rails"
 

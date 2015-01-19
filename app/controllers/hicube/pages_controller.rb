@@ -4,7 +4,8 @@ module Hicube
   class PagesController < BaseController
     CREATE_UPDATE_ATTRIBUTES = [
       :title,
-      :body
+      :body,
+      :junction
     ]
 
     PERMITTED_PARAMS = [
