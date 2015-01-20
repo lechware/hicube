@@ -1,7 +1,7 @@
 class GenerateHicubePages < Mongoid::Migration
   def self.up
     puts "Creating Hicube Pages"
-    Hicube::Page.create!(title: 'About', body: '*This is bold text*')
+    Hicube::Page.create!(title: 'About', junction: "1", body: '*This is bold text*')
   end
 
   def self.down

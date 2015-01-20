@@ -16,7 +16,7 @@ module Hicube
     field :bd, type: String,
       as:             :body
 
-    field :jt, type: Boolean,
+    field :jt, type: Boolean, # Saving as String, so don't have to do transalation from String to Boolean in controller
       as:             :junction,
       default:        false
 
@@ -29,9 +29,10 @@ module Hicube
     # Scopes
     #
     default_scope -> {where(junction: false)}
-    
-    # def to_param
-    #   self.title
-    # end
+
+    def junction?
+      self.junction
+    end
+
   end
 end

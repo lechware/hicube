@@ -10,6 +10,10 @@ module Hicube
         end
       end
     end
-    
+
+    def header_links
+      Hicube::Page.unscoped.only(:id, :title, :slugs, :junction).all.to_a
+    end    
+  
   end
 end
