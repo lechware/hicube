@@ -11,9 +11,9 @@ module Hicube
       end
     end
 
-    def header_links
-      Hicube::Page.only(:id, :title, :slugs, :junction).all.to_a
-    end    
+    # def header_links
+    #   Hicube::Page.parents
+    # end    
   
   end
 end

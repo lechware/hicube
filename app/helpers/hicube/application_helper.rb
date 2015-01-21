@@ -10,7 +10,7 @@ module Hicube
     end
 
     def header_links
-      Hicube::Page.only(:id, :title, :slugs).all.to_a
+      Hicube::Page.parents
     end
 
     def active_link?(path)
