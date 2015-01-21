@@ -61,6 +61,7 @@ module Hicube
       # Determine the class based on the resource name if not provided.
       #FIXME: Do not hardcode engine name
       resource_class = options[:class] || "Hicube::#{resource_name.singularize.camelize}".classify.constantize
+      
 
       unless params.key?(resource_name)
         notify :error, ::I18n.t('messages.resource.missing_parameters',

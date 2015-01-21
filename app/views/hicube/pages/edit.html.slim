@@ -5,5 +5,5 @@ section.content
         .box-header
           h3.box-title
             | Page Details
-        = form_for @page, url: page_path(@page), role: 'form' do |f|
+        = form_for @page, as: :page, url: page_path(@page), role: 'form' do |f|
           = render partial: 'form', locals: { f: f, parent_id: (@page.junction? ? @page.parent.id : '') }
