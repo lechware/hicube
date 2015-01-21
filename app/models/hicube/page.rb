@@ -42,7 +42,7 @@ module Hicube
     end
 
     def child?
-      !self.parent.nil? and self.parent.exists?
+      !self.parent.nil? and self.parent.present?
     end
   end
 end
