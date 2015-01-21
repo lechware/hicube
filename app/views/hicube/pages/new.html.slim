@@ -6,4 +6,4 @@ section.content
           h3.box-title
             | Page Details
         = form_for :page, url: pages_path, role: 'form' do |f|
-          = render partial: 'form', locals: { f: f, parent_id: '' }
+          = render partial: 'form', locals: { f: f, parent_id: ((@page.present? and @page.junction?) ? @page.parent.id : '') }
