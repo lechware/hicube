@@ -42,7 +42,7 @@ module Hicube
     end
 
     def child?
-      self.parent.nil? or self.parent.empty?
+      !self.parent.nil?
     end
   end
 end
