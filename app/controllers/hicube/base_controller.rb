@@ -88,7 +88,7 @@ module Hicube
       # FIXME: Do not hard code engine name 
       resource_class = options[:class] || "Hicube::#{resource_name.singularize.camelize}".classify.constantize
 
-      resource = resource_class.unscoped.find(params[:id])
+      resource = resource_class.find(params[:id])
 
       # # Confirm current user has permission to view resource.
       # unless resource.account == current_account
@@ -120,7 +120,7 @@ module Hicube
 
       # Set an instance variable @name to contain the names for this user.
       #FIXME: Do not hard code Hicube here
-      instance_variable_set("@#{resource_name}", "Hicube::#{resource_name.singularize.camelize}".classify.constantize.unscoped.all)
+      instance_variable_set("@#{resource_name}", "Hicube::#{resource_name.singularize.camelize}".classify.constantize.all)
     end
 
     # def setup_account!

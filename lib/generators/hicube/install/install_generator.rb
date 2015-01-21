@@ -19,7 +19,6 @@ module Hicube
       def copy_migrations
         migration_template "generate_hicube_users.rb", "db/migrate/generate_hicube_users.rb"
         migration_template "generate_hicube_pages.rb", "db/migrate/generate_hicube_pages.rb"
-        migration_template "add_junction_to_page.rb", "db/migrate/add_junction_to_page.rb"
       end
     end
   end

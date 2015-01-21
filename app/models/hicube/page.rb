@@ -10,15 +10,21 @@ module Hicube
     #
     slug              :title
 
+    #
+    #
+    #
+    has_many :children, class_name: 'Hicube::Page'
+    belongs_to :parent, class_name: 'Hicube::Page'
+
     field :tt, type: String,
       as:             :title
 
     field :bd, type: String,
       as:             :body
 
-    field :jt, type: Boolean, # Saving as String, so don't have to do transalation from String to Boolean in controller
-      as:             :junction,
-      default:        false
+    # field :jt, type: Boolean, # Saving as String, so don't have to do transalation from String to Boolean in controller
+    #   as:             :junction,
+    #   default:        false
 
     # SEO settings
 
@@ -28,11 +34,15 @@ module Hicube
     #
     # Scopes
     #
-    default_scope -> {where(junction: false)}
+    # default_scope -> { asc(:parent) }
+    scope :parents, -> { where(parent: nil) }
 
     def junction?
-      self.junction
+      !(self.children.nil? or self.children.empty?)
     end
 
+    def child?
+      self.parent.nil? or self.parent.empty?
+    end
   end
 end

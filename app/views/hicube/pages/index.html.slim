@@ -13,13 +13,21 @@ section.content
                   .col-md-11
                     = Hicube::Page.human_attribute_name(:title)
                   .col-md-1
-                  
             tbody
-              - @pages.each do |p|
-                tr
+              - @pages.parents.each do |p|
+                tr 
                   td
                     .col-md-11
                       = p.title
                     .col-md-1
                       = link_to t('edit'), edit_page_path(p), class: 'btn btn-sm btn-primary'
-            
+                - p.children.each do |child|
+                  tr  
+                    td
+                      .col-xs-11
+                        | &nbsp;          
+                        i.fa.fa-angle-double-right
+                        '   
+                        = child.title
+                      .col-xs-1
+                        = link_to t('edit'), edit_page_path(child), class: 'btn btn-sm btn-primary'                

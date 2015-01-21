@@ -4,8 +4,8 @@ module Hicube
   class PagesController < BaseController
     CREATE_UPDATE_ATTRIBUTES = [
       :title,
-      :body,
-      :junction
+      :parent,
+      :body
     ]
 
     PERMITTED_PARAMS = [
@@ -31,6 +31,7 @@ module Hicube
     def create
       logger.debug "Creating page with #{params}"
       @page = Hicube::Page.new(params[:page].slice(*CREATE_UPDATE_ATTRIBUTES))
+      # @page.parent = Hicube::Page.unscoped.find(params[:page][:parent]) unless params[:page][:parent].blank? or params[:page][:parent].empty?
       
       @page.save!
 

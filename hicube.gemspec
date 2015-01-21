@@ -58,7 +58,7 @@ Gem::Specification.new do |s|
 
   # For migrations
   s.add_dependency "mongoid_rails_migrations"
-
+  
   # Pagedown - markup editor used by Stackoverflow
   s.add_dependency "pagedown-bootstrap-rails"
 
