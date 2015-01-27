@@ -1,0 +1,17 @@
+.box-body
+  .form-group
+    - if params.has_key?('image')
+      = f.label :image
+      = f.file_field :image, class: 'form-control'
+    - else
+      = f.label :file
+      = f.file_field :file, class: 'form-control'
+  .form-group
+    = f.label :tags
+    - if current_page?(new_document_path)
+      = f.text_field :tags, placeholder: 'Enter tags ...', class: 'form-control'
+    - else
+      = f.text_field :tags, value: @document.tags.map(&:name), placeholder: 'Enter tags ...', class: 'form-control'
+.box-footer
+  button.btn.btn-primary[type="submit"]
+    | Submit 

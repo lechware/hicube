@@ -4,6 +4,7 @@ module Hicube
   module Generators
     class InstallGenerator < ::Rails::Generators::Base
       include Rails::Generators::Migration
+
       source_root File.expand_path('../templates', __FILE__)
       desc "add migrations"
 
@@ -20,6 +21,7 @@ module Hicube
         migration_template "generate_hicube_users.rb", "db/migrate/generate_hicube_users.rb"
         migration_template "generate_hicube_pages.rb", "db/migrate/generate_hicube_pages.rb"
       end
+
     end
   end
 end

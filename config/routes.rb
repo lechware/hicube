@@ -10,7 +10,10 @@ Hicube::Engine.routes.draw do
     module:      :devise
 
   resources :pages
-    
+
+  resources :documents
+
+  resource :tag
 end
 
 Rails.application.routes.draw do

@@ -1,0 +1,54 @@
+section.content
+  .row
+    .col-md-12
+      .box.box-primary
+        .box-header
+          i.fa.fa-file
+          h3.box-title
+            | #{params.has_key?(:image)?t('Image'):t('Document')} List
+          / .box-tools.pull-right
+          /   ul.pagination.pagination-sm.inline
+          /     li
+          /       a[href="#"]
+          /         | «
+          /     li
+          /       a[href="#"]
+          /         | 1
+          /     li
+          /       a[href="#"]
+          /         | 2
+          /     li
+          /       a[href="#"]
+          /         | 3
+          /     li
+          /       a[href="#"]
+          /         | »
+        .box-body
+          ul.todo-list
+            - @documents.each do |d|              
+              li
+                span.handle
+                  i.fa.fa-ellipsis-v
+                  '   
+                  i.fa.fa-ellipsis-v
+                / input[type="checkbox" value="" name=""]
+                span.text
+                  - if params.has_key?(:image)
+                   = d.image.file.filename
+                  - else
+                    = d.file.file.filename
+                - d.tags.each do |tag|
+                  small.label.label-danger
+                    / i.fa.fa-clock-o
+                    '     
+                    = tag.name
+                .tools
+                  = link_to edit_document_path(d), style: "color: red;" do
+                    i.fa.fa-edit
+                  = link_to document_path(d), method: :delete, data: { confirm: "Are you sure?" }, style: "color: red;" do
+                    i.fa.fa-trash-o
+
+        .box-footer.clearfix.no-border
+          = link_to new_document_path, class: 'btn btn-default pull-right' do
+            i.fa.fa-plus
+            |   Add item

@@ -1,5 +1,7 @@
 require 'adminlte-rails'
 require 'devise'
+require 'carrierwave-aws'
+require 'carrierwave/mongoid'
 require 'font-awesome-rails'
 require 'jquery-datatables-rails'
 require 'jquery-rails'
