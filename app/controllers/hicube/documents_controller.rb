@@ -3,6 +3,7 @@ require_dependency "hicube/application_controller"
 module Hicube
   class DocumentsController < BaseController
     CREATE_UPDATE_ATTRIBUTES = [
+      :name,
       :image,
       :file
     ]
@@ -41,11 +42,16 @@ module Hicube
           type:       Hicube::Document.model_name.human,
           resource:   @document
         )
-        format.html { redirect_to action: :index }
+        if params[:document].has_key? :image
+          format.html { redirect_to action: :index, image: true }
+        else
+          format.html { redirect_to action: :index }
+        end
       end
     end
 
     def destroy
+      img = @document.image?
       @document.destroy
 
       respond_to do |format|
@@ -53,7 +59,11 @@ module Hicube
           type:       Hicube::Document.model_name.human,
           resource:   @document
         )
-        format.html { redirect_to action: :index }
+        if img
+          format.html { redirect_to action: :index, image: true }
+        else
+          format.html { redirect_to action: :index }
+        end
       end
     end
 
@@ -82,7 +92,11 @@ module Hicube
           type:       Hicube::Document.model_name.human,
           resource:   @document
         )
-        format.html { redirect_to action: :index }
+        if params[:document].has_key? :image
+          format.html { redirect_to action: :index, image: true }
+        else
+          format.html { redirect_to action: :index }
+        end
       end
      end
     

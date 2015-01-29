@@ -31,21 +31,18 @@ section.content
                   i.fa.fa-ellipsis-v
                   '   
                   i.fa.fa-ellipsis-v
-                / input[type="checkbox" value="" name=""]
+                
                 span.text
-                  - if params.has_key?(:image)
-                   = d.image.file.filename
-                  - else
-                    = d.file.file.filename
+                  = d.name
                 - d.tags.each do |tag|
                   small.label.label-danger
                     / i.fa.fa-clock-o
                     '     
                     = tag.name
                 .tools
-                  = link_to edit_document_path(d), style: "color: red;" do
+                  = link_to edit_document_path(d) do
                     i.fa.fa-edit
-                  = link_to document_path(d), method: :delete, data: { confirm: "Are you sure?" }, style: "color: red;" do
+                  = link_to document_path(d), method: :delete, data: { confirm: "Are you sure?" } do
                     i.fa.fa-trash-o
 
         .box-footer.clearfix.no-border

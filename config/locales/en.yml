@@ -1,0 +1,4 @@
+components:
+  markdown_editor:
+    insert_image:
+      input_label: 'Filename'

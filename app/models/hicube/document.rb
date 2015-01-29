@@ -16,10 +16,24 @@ module Hicube
     mount_uploader :image, ImageUploader
 
     #
+    # Fields
+    #
+    field :n, type: String,
+      as:           :name
+    validates_presence_of :name
+    validates_uniqueness_of :name,
+      allow_blank:          :false,
+      message:              'is not unique or cannot be blank'
+
+    #
     # Scopes
     #
     scope :files, -> { where(:file.ne => nil) }
     scope :images, -> { where(:image.ne => nil) }
+
+    # def to_liquid
+    #   self.image.path
+    # end
 
   end
 end

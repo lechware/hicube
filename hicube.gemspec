@@ -33,6 +33,9 @@ Gem::Specification.new do |s|
   # Google Analytics
   s.add_dependency "google-analytics-rails"
 
+  # Templating
+  s.add_dependency "liquid"
+
   # This makes links to work as per prior to RAILS v 4.0.
   s.add_dependency "jquery-turbolinks"
 
@@ -60,7 +63,8 @@ Gem::Specification.new do |s|
   s.add_dependency "mongoid_rails_migrations"
   
   # Pagedown - markup editor used by Stackoverflow
-  s.add_dependency "pagedown-bootstrap-rails"
+  # Manually importing so behaviour can be modified for image & link dialogs
+  # s.add_dependency "pagedown-bootstrap-rails"
 
   # Required by Slim engine to render markdown
   s.add_dependency "redcarpet"

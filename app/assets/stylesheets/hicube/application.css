@@ -1,7 +1,8 @@
 //= require font-awesome
 //= require twitter/bootstrap
 //= require admin-lte
-//= require pagedown_bootstrap
+// require pagedown_bootstrap
+//= require hicube/pagedown-bootstrap/pagedown_bootstrap
 //= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
 //= require dataTables/extras/dataTables.responsive
 //= require_tree .

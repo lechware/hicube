@@ -72,7 +72,7 @@ module Hicube
           :type       => Hicube::Page.model_name.human,
           :resource   => @page
         )
-        format.html { redirect_to action: :show, id: @page }
+        format.html { redirect_to action: :index }
       end
     rescue Mongoid::Errors::Validations => e
       respond_to do |format|

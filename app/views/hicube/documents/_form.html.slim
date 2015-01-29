@@ -2,10 +2,23 @@
   .form-group
     - if params.has_key?('image')
       = f.label :image
-      = f.file_field :image, class: 'form-control'
+      .form-control
+        .col-xs-1 style="padding-left: 0px; padding-right: 0px;"
+          .btn.btn-default.btn-xs
+            = f.file_field :image, id: "image-upload", class: 'fileInput'
+            | Browse
+        .col-xs-10.col-md-10
+          = f.text_field :name, id: "image-name", placeholder: 'Name of File...', style: "border: 0px;"
+
     - else
       = f.label :file
-      = f.file_field :file, class: 'form-control'
+      .form-control
+        .col-xs-1 style="padding-left: 0px; padding-right: 0px;"
+          .btn.btn-default.btn-xs
+            = f.file_field :file, id: "file-upload", class: 'fileInput'
+            | Browse
+        .col-xs-10.col-md-10
+          = f.text_field :name, id: "file-name", placeholder: 'Name of File...', style: "border: 0px;"
   .form-group
     = f.label :tags
     - if current_page?(new_document_path)
