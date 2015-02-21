@@ -46,6 +46,12 @@ section.content
                     i.fa.fa-trash-o
 
         .box-footer.clearfix.no-border
-          = link_to new_document_path, class: 'btn btn-default pull-right' do
-            i.fa.fa-plus
-            |   Add item
+          - if params.has_key?(:image)
+            = link_to new_document_path(image: true), class: 'btn btn-default pull-right' do
+              i.fa.fa-plus
+                |   Add item  
+          - else
+            = link_to new_document_path, class: 'btn btn-default pull-right' do
+              i.fa.fa-plus
+                |   Add item  
+    
