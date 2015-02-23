@@ -39,7 +39,7 @@ module Hicube
           :type       => Hicube::Snippet.model_name.human,
           :resource   => @snippet
         )
-        format.html { redirect_to action: :show, id: @snippet }
+        format.html { redirect_to action: :index }
       end
     rescue Mongoid::Errors::Validations => e
       respond_to do |format|

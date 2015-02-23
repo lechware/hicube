@@ -31,19 +31,16 @@ module Hicube
     def create
       logger.debug "Creating page with #{params}"
       @page = Hicube::Page.new(params[:page].slice(*CREATE_UPDATE_ATTRIBUTES))
-      # @page.parent = Hicube::Page.unscoped.find(params[:page][:parent]) unless params[:page][:parent].blank? or params[:page][:parent].empty?
       
       @page.save!
 
-      # Save images if uploaded
-      # params[:page][:images].each { |i| @page.images.create! file: i }
       
       respond_to do |format|
         notify :notice, ::I18n.t('messages.resource.created',
           :type       => Hicube::Page.model_name.human,
           :resource   => @page
         )
-        format.html { redirect_to action: :show, id: @page }
+        format.html { redirect_to action: :index }
       end
     rescue Mongoid::Errors::Validations => e
       respond_to do |format|
