@@ -42,6 +42,21 @@ section.sidebar
           a href=new_page_path
             i.fa.fa-angle-double-right
             |  New
+    li.treeview class=active?([snippets_path, new_snippet_path])
+      a href="#"
+        i.fa.fa-laptop
+        span
+          = t 'snippets'
+        i.fa.fa-angle-left.pull-right
+      ul.treeview-menu
+        li class=active?([snippets_path])
+          a href=snippets_path 
+            i.fa.fa-angle-double-right
+            |  List
+        li class=active?([new_snippet_path])
+          a href=new_snippet_path
+            i.fa.fa-angle-double-right
+            |  New
     li.treeview class=active?([documents_path(image: true), new_document_path(image: true)])
       a href="#"
         i.fa.fa-laptop

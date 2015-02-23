@@ -11,6 +11,8 @@ Hicube::Engine.routes.draw do
 
   resources :pages
 
+  resources :snippets
+  
   resources :documents
 
   resource :tag
