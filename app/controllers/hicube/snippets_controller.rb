@@ -4,8 +4,7 @@ module Hicube
   class SnippetsController < BaseController
 
     CREATE_UPDATE_ATTRIBUTES = [
-      :title,
-      :parent,
+      :name,
       :body
     ]
 
