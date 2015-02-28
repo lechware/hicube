@@ -31,9 +31,12 @@ module Hicube
     scope :files, -> { where(:file.ne => nil) }
     scope :images, -> { where(:image.ne => nil) }
 
-    # def to_liquid
-    #   self.image.path
-    # end
+    def to_liquid
+      {
+        'url' => (self.image.nil? ? self.file_url : self.image_url),
+        'tags' => self.tags.map(&:name)
+      }
+    end
 
   end
 end

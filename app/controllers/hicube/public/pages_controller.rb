@@ -5,7 +5,7 @@ module Hicube
 
     def show
       @template = ::Liquid::Template.parse(@page.body)
-      @page_content = @template.render
+      @page_content = @template.render 'images' => Hicube::Document.images.all, 'documents' => Hicube::Document.files.all
     end
   end
 end

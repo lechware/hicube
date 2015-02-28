@@ -1,11 +1,11 @@
-module Canteen
+module Hicube
   module Liquid
     module Tags
       class ImgTag < ::Liquid::Tag
 
         def initialize(tag_name, name, tokens)
-          super
           @img = Hicube::Document.images.find_by(name: name)
+          super
         rescue
         end
 
