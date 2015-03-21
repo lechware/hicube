@@ -1,0 +1,4 @@
+section.content
+  .row
+    = form_for :account, url: accounts_path, role: 'form' do |f|
+      = render partial: 'form', locals: {f: f}

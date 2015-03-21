@@ -87,3 +87,24 @@ section.sidebar
           a href=new_document_path
             i.fa.fa-angle-double-right
             |  New
+    li.treeview class=active?([accounts_path, new_account_path])
+      a href="#"
+        i.fa.fa-laptop
+        span
+          = t 'Setting'
+        i.fa.fa-angle-left.pull-right
+      ul.treeview-menu
+        li class=active?([accounts_path])
+          a href=accounts_path 
+            i.fa.fa-angle-double-right
+            |  List
+        - if Hicube::Account.count == 0
+          li class=active?([new_account_path])
+            a href=new_account_path
+              i.fa.fa-angle-double-right
+              |  New
+        - else
+          li class=active?([edit_account_path(Hicube::Account.first)])
+            a href=edit_account_path(Hicube::Account.first)
+              i.fa.fa-angle-double-right
+              |  Edit

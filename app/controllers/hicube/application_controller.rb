@@ -9,6 +9,8 @@ module Hicube
     #around_filter :audit_trail
     before_filter :initialise_locale
 
+    before_filter :initialise_account_settings
+
     helper :all 
     
     helper_method :app_name
@@ -125,6 +127,12 @@ module Hicube
       # Log the exception and then re-raise so it can be handled as normal.
       # AUDIT_LOG.error("EXCEPTION") { "#{request.remote_ip}::#{request.method}::#{params[:controller]}##{params[:action]}::#{e.class.to_s}::#{e.message}::#{e.backtrace[0...5]}" }
       raise
+    end
+
+    def initialise_account_settings
+      Rails.application.configure do 
+        GA.tracker = Hicube::Account.first.ga unless Hicube::Account.first.nil? or Hicube::Account.first.ga.nil?
+      end
     end
 
     def initialise_locale

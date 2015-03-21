@@ -1,0 +1,13 @@
+section.content
+  .row
+    .col-xs-12
+      .box.box-primary
+        .box-header
+          .box-title
+            | Account Settings
+        .box-body
+          | Google Analytics - 
+          = @account.ga
+        .box-footer
+          = link_to 'Edit', edit_account_path(@account), class: 'btn btn-success'
+

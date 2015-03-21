@@ -1,0 +1,12 @@
+.col-xs-12
+  .box.box-primary
+    .box-header
+      .box-title
+        | Google Analytics
+    .box-body
+      .form-group
+        label Tracking Code
+        = f.text_field :ga, class: 'form-control'
+
+    .box-footer
+      button.btn.btn-primary type="submit" Save
