@@ -13,5 +13,8 @@ module Hicube
     validates_presence_of :name
     validates_presence_of :body
 
+    def to_s
+      self.name
+    end
   end
 end

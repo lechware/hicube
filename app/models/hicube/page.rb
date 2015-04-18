@@ -37,6 +37,10 @@ module Hicube
     # default_scope -> { asc(:parent) }
     scope :parents, -> { where(parent: nil) }
 
+    def to_s
+      self.title
+    end
+
     def junction?
       !(self.children.nil? or self.children.empty?)
     end

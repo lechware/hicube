@@ -2,3 +2,17 @@ components:
   markdown_editor:
     insert_image:
       input_label: 'Filename'
+en:
+  messages:
+    resource:
+      created: "Created %{type}: %{resource}."
+      destroyed: "Deleted %{type}: %{resource}."
+      missing_parameters: "Missing mandatory parameters for %{type}."
+      not_found: "Could not find %{type} matching %{criteria}: %{value}."
+      not_permitted: "You do not have permission to view %{type}: %{resource}."
+      not_valid: "Validation failed: %{errors}"
+      updated: "Updated %{type}: %{resource}."
+      tested: "Test message has been sent to %{resource}."
+    invite:
+      not_valid: Email address already taken or not valid. 
+      already_exists: User already exists    

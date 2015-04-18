@@ -11,5 +11,9 @@ module Hicube
 
     field :n, type: String,
       as:           :name
+    
+    def to_s
+      self.name
+    end
   end
 end

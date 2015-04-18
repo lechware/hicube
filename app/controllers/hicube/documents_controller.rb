@@ -2,16 +2,6 @@ require_dependency "hicube/application_controller"
 
 module Hicube
   class DocumentsController < BaseController
-    CREATE_UPDATE_ATTRIBUTES = [
-      :name,
-      :image,
-      :file
-    ]
-
-    PERMITTED_PARAMS = [
-      CREATE_UPDATE_ATTRIBUTES,
-      :tags
-    ]
 
     before_action :load_resource, except: [
       :create,
@@ -30,8 +20,8 @@ module Hicube
     ]
 
     def create
-      @document = Document.new(params[:document].slice(*CREATE_UPDATE_ATTRIBUTES))
-      params[:document][:tags].split(' ').each do |s|
+      @document = Document.new document_params.except(:tags)
+      document_params[:tags].split(' ').each do |s|
         @document.tags << Hicube::Tag.find_or_create_by(name: s)
       end
 
@@ -78,7 +68,7 @@ module Hicube
     end
     
     def update  
-      @document.update_attributes(params[:document].slice(*CREATE_UPDATE_ATTRIBUTES))
+      @document.update_attributes document_params.except(:tags)
       
       @document.tags = nil
       params[:document][:tags].split(' ').each do |s|
@@ -88,7 +78,7 @@ module Hicube
       @document.save!
 
       respond_to do |format|
-        notify :notice, ::I18n.t('messages.resource.created',
+        notify :notice, ::I18n.t('messages.resource.updated',
           type:       Hicube::Document.model_name.human,
           resource:   @document
         )
@@ -103,8 +93,7 @@ module Hicube
     private
 
     def document_params
-      params.require(:document).permit(*PERMITTED_PARAMS)
+      params.require(:document).permit(:name, :image, :file, :tags)
     end
-  
   end
 end

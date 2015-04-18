@@ -1,0 +1,88 @@
+section.sidebar
+  .user-panel
+    .pull-left.image
+      = image_tag 'avatar.png', alt: "User Image", class: 'img-circle'
+    .pull-left.info
+      p
+        | Hello, #{current_user.name}
+      a[href="#"]
+        i.fa.fa-circle.text-success
+        |  Online
+  form.sidebar-form[action="#" method="get"]
+    .input-group
+      input.form-control[type="text" name="q" placeholder="Search..."]
+      span.input-group-btn
+        button#search-btn.btn.btn-flat[type="submit" name="search"]
+          i.fa.fa-search
+  ul.sidebar-menu
+    li.header MAIN NAVIGATION
+    / li class=sidebar_class(:show, :dashboard)
+    /   = link_to dashboard_path
+    /     i.fa.fa-dashboard
+    /     span
+    /       | Dashboard
+    /     small.badge.pull-right.bg-green
+    /       | new
+    li.treeview class=(sidebar_class(:new, :page) || sidebar_class(:edit, :page) || sidebar_class(:index, :page) || sidebar_class(:show, :page))
+      a href="#"
+        i.fa.fa-file-code-o
+        span
+          = t 'pages'
+        i.fa.fa-angle-left.pull-right
+      ul.treeview-menu
+        li class=sidebar_class(:index, :page)
+          a href=pages_path
+            i.fa.fa-angle-double-right
+            = t 'list'
+        li class=sidebar_class(:new, :page)
+          a href=new_page_path
+            i.fa.fa-angle-double-right
+            = t 'new'
+        - unless sidebar_class(:edit, :page).nil? and sidebar_class(:show, :page).nil?
+          li class=(sidebar_class(:edit, :page) or sidebar_class(:show, :page))
+            a href=""
+              i.fa.fa-angle-double-right
+              = @page
+
+    li.treeview class=(sidebar_class(:new, :snippet) || sidebar_class(:edit, :snippet) || sidebar_class(:index, :snippet) || sidebar_class(:show, :snippet))
+      a href="#"
+        i.fa.fa-code
+        span
+          | Snippets
+        i.fa.fa-angle-left.pull-right
+      ul.treeview-menu
+        li class=sidebar_class(:index, :snippet)
+          a href=snippets_path
+            i.fa.fa-angle-double-right
+            = t 'list'
+        li class=sidebar_class(:new, :snippet)
+          a href=new_snippet_path
+            i.fa.fa-angle-double-right
+            = t 'new'
+        - unless sidebar_class(:edit, :snippet).nil? and sidebar_class(:show, :page).nil?
+          li class=(sidebar_class(:show, :snippet) or sidebar_class(:edit, :snippet))
+            a href=""
+              i.fa.fa-angle-double-right
+              = @snippet 
+
+    li.treeview class=(sidebar_class(:new, :document) || sidebar_class(:edit, :document) || sidebar_class(:index, :document) || sidebar_class(:show, :document))
+      a href="#"
+        i.fa.fa-picture-o
+        span
+          | Documents
+        i.fa.fa-angle-left.pull-right
+      ul.treeview-menu
+        li class=sidebar_class(:index, :document)
+          a href=documents_path
+            i.fa.fa-angle-double-right
+            = t 'list'
+        li class=sidebar_class(:new, :document)
+          a href=new_document_path
+            i.fa.fa-angle-double-right
+            = t 'new'
+        - unless sidebar_class(:edit, :document).nil? and sidebar_class(:show, :document).nil?
+          li class=(sidebar_class(:show, :document) or sidebar_class(:edit, :document))
+            a href=""
+              i.fa.fa-angle-double-right
+              = @document
+    = yield :sidebar_menu

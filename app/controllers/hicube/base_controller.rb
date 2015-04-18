@@ -1,37 +1,16 @@
 module Hicube
   class BaseController < Hicube::ApplicationController
 
-    # helper_method :current_account
-
     # Skip the before filter so we can insert it in the correctly place to preserve order.
     # skip_around_filter :audit_trail
 
     before_action :authenticate_user!
     before_filter :initialise_current_user
 
-    before_action :permit_resource_params
-
     # around_filter :audit_trail
-
-    # before_filter :setup_account!, :except => [:edit,:update,:create,:new]
 
     # layout 'application'
 
-    #
-    # Public Class Methods
-    #
-    public
-
-    #
-    # Public Instance Methods
-    #
-    public
-
-    #
-    # Protected Instance Methods
-    #
-    protected
-    
     #
     # Private Instance Methods
     #
@@ -45,12 +24,6 @@ module Hicube
     # def current_account
     #   User.current.account
     # end
-
-    def permit_resource_params
-      resource = controller_name.singularize.to_sym
-      method = "#{resource}_params"
-      params[resource] &&= send(method) if respond_to?(method, true)
-    end
 
     # Check resource params are present based on the current controller name.
     def check_resource_params(options = {})

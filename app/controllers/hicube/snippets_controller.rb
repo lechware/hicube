@@ -3,15 +3,6 @@ require_dependency "hicube/base_controller"
 module Hicube
   class SnippetsController < BaseController
 
-    CREATE_UPDATE_ATTRIBUTES = [
-      :name,
-      :body
-    ]
-
-    PERMITTED_PARAMS = [
-      CREATE_UPDATE_ATTRIBUTES,
-    ]
-
     before_action :load_resource, except: [
       :create,
       :index,
@@ -30,8 +21,7 @@ module Hicube
 
     def create
       logger.debug "Creating snippet with #{params}"
-      @snippet = Hicube::Snippet.new(params[:snippet].slice(*CREATE_UPDATE_ATTRIBUTES))
-      
+      @snippet = Hicube::Snippet.new snippet_params
       @snippet.save!
     
       respond_to do |format|
@@ -62,12 +52,12 @@ module Hicube
 
     def update
       logger.debug "Updating snippets with #{params}"
-      @snippet.update_attributes(params[:snippet].slice(*CREATE_UPDATE_ATTRIBUTES))
+      @snippet.update_attributes snippet_params
 
       @snippet.save!
         
       respond_to do |format|
-        notify :notice, ::I18n.t('messages.resource.created',
+        notify :notice, ::I18n.t('messages.resource.updated',
           :type       => Hicube::Snippet.model_name.human,
           :resource   => @snippet
         )
@@ -86,7 +76,7 @@ module Hicube
     private
 
     def snippet_params
-      params.require(:snippet).permit(*PERMITTED_PARAMS)
+      params.require(:snippet).permit(:name, :body)
     end
 
   end

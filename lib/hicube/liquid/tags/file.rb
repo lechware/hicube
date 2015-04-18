@@ -1,7 +1,7 @@
 module Hicube
   module Liquid
     module Tags
-      class DocTag < ::Liquid::Tag
+      class FileTag < ::Liquid::Tag
 
         def initialize(tag_name, name, tokens)
           super
@@ -14,7 +14,7 @@ module Hicube
         end
       end
 
-      ::Liquid::Template.register_tag('doc_tag', DocTag)
+      ::Liquid::Template.register_tag('file_tag', FileTag)
 
     end
   end

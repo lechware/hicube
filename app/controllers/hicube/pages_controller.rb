@@ -2,16 +2,7 @@ require_dependency "hicube/base_controller"
 
 module Hicube
   class PagesController < BaseController
-    CREATE_UPDATE_ATTRIBUTES = [
-      :title,
-      :parent,
-      :body
-    ]
-
-    PERMITTED_PARAMS = [
-      CREATE_UPDATE_ATTRIBUTES,
-    ]
-
+    
     before_action :load_resource, except: [
       :create,
       :index,
@@ -30,8 +21,7 @@ module Hicube
 
     def create
       logger.debug "Creating page with #{params}"
-      @page = Hicube::Page.new(params[:page].slice(*CREATE_UPDATE_ATTRIBUTES))
-      
+      @page = Hicube::Page.new page_params
       @page.save!
 
       
@@ -60,12 +50,12 @@ module Hicube
 
     def update
       logger.debug "Updating Pages with #{params}"
-      @page.update_attributes(params[:page].slice(*CREATE_UPDATE_ATTRIBUTES))
+      @page.update_attributes page_params
 
       @page.save!
         
       respond_to do |format|
-        notify :notice, ::I18n.t('messages.resource.created',
+        notify :notice, ::I18n.t('messages.resource.updated',
           :type       => Hicube::Page.model_name.human,
           :resource   => @page
         )
@@ -84,7 +74,7 @@ module Hicube
     private
 
     def page_params
-      params.require(:page).permit(*PERMITTED_PARAMS)
+      params.require(:page).permit(:title, :parent, :body)
     end
   
   end

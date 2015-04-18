@@ -6,19 +6,9 @@
     .col-xs-4
       = f.label :parent
       = f.collection_select :parent, Hicube::Page.parents,:id,:title,{include_blank: '', selected: parent_id},{class: 'form-control'}
-
-    / .col-xs-3
-    /   br
-    /   .checkbox
-    /     label
-    /       = f.check_box :junction
-    /       '    
-    /       = Hicube::Page.human_attribute_name(:junction)
-    /       '   Only
   br
   .form-group
     = f.label :body
-    / = f.text_area :body, placeholder: 'Enter ...', rows: "10", class: 'wmd-input form-control'
     .wmd-panel
       #wmd-button-bar
       = f.text_area :body, id: "wmd-input", rows: "20", class: 'wmd-input form-control'
