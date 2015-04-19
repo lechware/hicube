@@ -32,16 +32,11 @@ module Hicube
           type:       Hicube::Document.model_name.human,
           resource:   @document
         )
-        if params[:document].has_key? :image
-          format.html { redirect_to action: :index, image: true }
-        else
-          format.html { redirect_to action: :index }
-        end
+        format.html { redirect_to action: :index }
       end
     end
 
     def destroy
-      img = @document.image?
       @document.destroy
 
       respond_to do |format|
@@ -49,11 +44,7 @@ module Hicube
           type:       Hicube::Document.model_name.human,
           resource:   @document
         )
-        if img
-          format.html { redirect_to action: :index, image: true }
-        else
-          format.html { redirect_to action: :index }
-        end
+        format.html { redirect_to action: :index }
       end
     end
 
@@ -81,11 +72,7 @@ module Hicube
           type:       Hicube::Document.model_name.human,
           resource:   @document
         )
-        if params[:document].has_key? :image
-          format.html { redirect_to action: :index, image: true }
-        else
-          format.html { redirect_to action: :index }
-        end
+        format.html { redirect_to action: :index }
       end
      end
     
