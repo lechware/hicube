@@ -61,7 +61,6 @@ module Hicube
     end
     
     def index
-      @documents = params.has_key?(:image) ? @documents.images : @documents.files
     end
 
     def show
@@ -93,7 +92,7 @@ module Hicube
     private
 
     def document_params
-      params.require(:document).permit(:name, :image, :file, :tags)
+      params.require(:document).permit(:name, :file, :tags)
     end
   end
 end
