@@ -18,7 +18,7 @@ module Hicube
     private
 
     def page_params
-      params.require(:page).permit(:to, :subject, :name, :email, :phone, :message)
+      params.require(:page).permit(:from, :to, :subject, :name, :email, :phone, :message)
     end
   end
 end
