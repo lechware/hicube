@@ -11,6 +11,8 @@ module Hicube
     def mail
       PageMailer.contact_form(page_params).deliver_now
       redirect_to :back, flash: {success: "Message Sent! We will be in touch shortly."}
+    rescue
+      redirect_to :back
     end
 
     private

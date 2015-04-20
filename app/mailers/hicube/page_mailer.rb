@@ -6,7 +6,7 @@ module Hicube
       @name = options[:name]
       @phone = options[:phone]
       @message = options[:message]
-      mail(to: options[:to], reply_to: options[:email], subject: options[:subject])
+      mail(from: options[:from], to: options[:to], reply_to: options[:email], subject: options[:subject])
     end
 
   end
