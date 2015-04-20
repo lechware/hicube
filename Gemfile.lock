@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    hicube (1.1.0)
+    hicube (1.1.1)
       carrierwave-aws
       carrierwave-mongoid
       coffee-rails (~> 4.1.0)
