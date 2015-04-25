@@ -30,11 +30,12 @@ module Hicube
 
     # Validations
     validates_presence_of :title
+    validates_uniqueness_of :title, scope: :parent
 
     #
     # Scopes
     #
-    # default_scope -> { asc(:parent) }
+    default_scope -> { ne(_slugs: ["index"]) }
     scope :parents, -> { where(parent: nil) }
 
     def to_s

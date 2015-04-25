@@ -2,17 +2,15 @@
   .row
     .col-xs-8
       = f.label :title
-      = f.text_field :title, placeholder: 'Enter ...', class: 'form-control'
+      = f.text_field :title, placeholder: 'Enter ...', disabled: (@page.title.eql?('Index') rescue false), class: 'form-control'
     .col-xs-4
       = f.label :parent
-      = f.collection_select :parent, Hicube::Page.parents,:id,:title,{include_blank: '', selected: parent_id},{class: 'form-control'}
+      = f.collection_select :parent, Hicube::Page.parents,:id,:title,{include_blank: '', selected: parent_id},{class: 'form-control', disabled: (@page.title.eql?('Index') rescue false)}
   br
   .form-group
     = f.label :body
-    .wmd-panel
-      #wmd-button-bar
-      = f.text_area :body, id: "wmd-input", rows: "20", class: 'wmd-input form-control'
-    #wmd-preview.wmd-panel.wmd-preview
+    = f.text_area :body, id: "textarea", rows: "5", class: 'form-control'
+  
 .box-footer
   button.btn.btn-primary[type="submit"]
     | Submit 

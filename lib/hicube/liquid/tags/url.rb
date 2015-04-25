@@ -1,11 +1,11 @@
 module Hicube
   module Liquid
     module Tags
-      class FileTag < ::Liquid::Tag
+      class UrlTag < ::Liquid::Tag
 
         def initialize(tag_name, name, tokens)
           super
-          @doc = Hicube::Document.files.find_by(name: name)
+          @doc = Hicube::Document.find_by(name: name)
         rescue
         end
 
@@ -14,7 +14,7 @@ module Hicube
         end
       end
 
-      ::Liquid::Template.register_tag('file_tag', FileTag)
+      ::Liquid::Template.register_tag('url_tag', UrlTag)
 
     end
   end

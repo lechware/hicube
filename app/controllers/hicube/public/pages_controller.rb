@@ -1,11 +1,21 @@
-module Hicube
+module Hicube  
   class Public::PagesController < Public::BaseController
 
     before_action :load_resource, except: [:mail]
 
     def show
-      @template = ::Liquid::Template.parse(@page.body)
-      @page_content = @template.render 'images' => Hicube::Document.images.all, 'documents' => Hicube::Document.files.all
+      filename = "#{Rails.root}/tmp/#{@page}_#{Process.pid}.slim"
+      
+      f = File.new(filename, "w+")
+      f.write ::Liquid::Template.parse(@page.body).render
+      f.close
+
+      @page_content = ::Slim::Template.new(filename).render Object.new, links: Hicube::Page.parents.map(&:slug), documents: Hicube::Document.all
+      # @header = ::Liquid::Template.parse(@page.header).render
+      # @page_content = @template.render 'images' => Hicube::Document.images.all, 'documents' => Hicube::Document.files.all
+    rescue Exception => e
+      logger.error "Error: Rendering #{@page} failed."
+      logger.error e
     end
 
     def mail

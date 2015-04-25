@@ -1,3 +1,16 @@
 = Hicube
+= Install
+
+gem 'hicube'
+
+rails g hicube:install
+
+This will copy migrations, which can then be run using
+
+rake db:migrate 
+
+= Add Routes
+
+mount Hicube::Engine => '/hicube', as: 'hicube'
 
 This project rocks and uses MIT-LICENSE.

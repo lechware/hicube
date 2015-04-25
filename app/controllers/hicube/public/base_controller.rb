@@ -45,7 +45,7 @@ module Hicube
       # FIXME: Do not hard code engine name 
       resource_class = options[:class] || "Hicube::#{resource_name.singularize.camelize}".classify.constantize
 
-      resource = resource_class.find(params[:id])
+      resource = resource_class.unscoped.find((params.has_key?(:id) ? params[:id] : 'index'))
 
       # # Confirm current user has permission to view resource.
       # unless resource.account == current_account

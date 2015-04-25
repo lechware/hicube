@@ -22,6 +22,8 @@ end
 
 Rails.application.routes.draw do
 
+  root 'hicube/public/pages#show', id: 'index'
+
   get ':id', to: 'hicube/public/pages#show', only: [:show]
   post 'mail', to: 'hicube/public/pages#mail', only: [:mail]
   # get '/',        to: 'hicube/pages#show'

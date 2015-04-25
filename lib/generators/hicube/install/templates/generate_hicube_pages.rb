@@ -1,11 +1,11 @@
 class GenerateHicubePages < Mongoid::Migration
   def self.up
-    puts "Creating Hicube Pages"
-    Hicube::Page.create!(title: 'About', body: '*This is bold text*')
+    puts "Creating Hicube Index Page"
+    Hicube::Page.create!(title: 'Home', body: '*This is bold text*')
   end
 
   def self.down
-    pages = Hicube::Page.where(title: 'About')
+    pages = Hicube::Page.where(title: 'Home')
     return if pages.nil? || pages.empty?
     pages.each do |page|
       page.delete

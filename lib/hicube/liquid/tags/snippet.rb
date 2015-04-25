@@ -17,15 +17,16 @@ module Hicube
 
         def render(context)
           unless @snippet.nil?
-            @template = ::Liquid::Template.parse(@snippet.body)
-            if @variables.length > 1
-              @template.render @variables[1] => context[@variables[2].strip]
+            @snippet.body
+            # @template = ::Liquid::Template.parse(@snippet.body)
+            # if @variables.length > 1
+            #   @template.render @variables[1] => context[@variables[2].strip]
 
-              # FIXME: Handle passing more than one variable
+            #   # FIXME: Handle passing more than one variable
               
-            else
-              @template.render
-            end
+            # else
+            #   @template.render
+            # end
           else
             "snippet_not_found"
           end

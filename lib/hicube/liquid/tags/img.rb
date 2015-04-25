@@ -4,13 +4,13 @@ module Hicube
       class ImgTag < ::Liquid::Tag
 
         def initialize(tag_name, name, tokens)
-          @img = Hicube::Document.images.find_by(name: name)
+          @img = Hicube::Document.find_by(name: name)
           super
         rescue
         end
 
         def render(context)
-          @img.nil? ? "image_not_found" : @img.image_url
+          @img.nil? ? "img src=\"image_not_found.png\" alt=\"image_not_found\"" : "img src=\"#{@img.file_url}\""
         end
       end
 

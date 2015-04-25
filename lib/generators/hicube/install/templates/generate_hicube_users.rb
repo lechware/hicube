@@ -1,7 +1,7 @@
 class GenerateHicubeUsers < Mongoid::Migration
   def self.up
     puts "Creating Hicube User"
-    Hicube::User.create!(email: 'admin@example.com', password: 'admin', name: 'Admin User')
+    Hicube::User.create!(email: 'admin@example.com', password: 'admin', name: 'Admin User', admin: true)
   end
 
   def self.down

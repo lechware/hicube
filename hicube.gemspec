@@ -44,6 +44,9 @@ Gem::Specification.new do |s|
   # Running active jobs
   s.add_dependency "delayed_job_mongoid"
   
+  # Syntax Highlighting for textarea
+  s.add_dependency "codemirror-rails"
+
   s.add_dependency 'coffee-rails', '~> 4.1.0'
 
   # Rails Fontawesome support

@@ -11,6 +11,7 @@
  *= require ionicons
  *= require jquery.fileupload
  *= require jquery.fileupload-ui
+ *= require codemirror
  
  * Adminlte and corresponding css
  *= require admin-lte

@@ -5,10 +5,7 @@
     
   .form-group
     = f.label :body
-    .wmd-panel
-      #wmd-button-bar
-      = f.text_area :body, id: "wmd-input", rows: "20", class: 'wmd-input form-control'
-    #wmd-preview.wmd-panel.wmd-preview
+    = f.text_area :body, id: "textarea", rows: "20", class: 'form-control'
 .box-footer
   button.btn.btn-primary[type="submit"]
     | Submit 
