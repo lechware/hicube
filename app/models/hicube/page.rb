@@ -15,7 +15,8 @@ module Hicube
     #
     has_many :children, class_name: 'Hicube::Page'
     belongs_to :parent, class_name: 'Hicube::Page'
-
+    embeds_many :content, class_name: 'Hicube::Content'
+    
     field :tt, type: String,
       as:             :title
 

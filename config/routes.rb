@@ -9,7 +9,9 @@ Hicube::Engine.routes.draw do
     failure_app: 'Hicube::Devise::FailureApp',
     module:      :devise
 
-  resources :pages
+  resources :pages do
+    resources :contents
+  end
 
   resources :snippets
   
@@ -25,12 +27,13 @@ Rails.application.routes.draw do
   root 'hicube/public/pages#show', id: 'index'
 
   get ':id', to: 'hicube/public/pages#show', only: [:show]
+  get ':id/edit', to: 'hicube/public/pages#edit', only: [:edit]
   post 'mail', to: 'hicube/public/pages#mail', only: [:mail]
   # get '/',        to: 'hicube/pages#show'
   # match '*path'   => 'hicube/pages#show', via: :all
 
   namespace :public do
-    resources :pages, only: [:show]
+    resources :pages, only: [:show, :edit]
   end
 
   get 'hicube/public/pages/:id', to: redirect('/%{id}')

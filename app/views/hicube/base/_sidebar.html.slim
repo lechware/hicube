@@ -41,8 +41,16 @@ section.sidebar
         - unless sidebar_class(:edit, :page).nil? and sidebar_class(:show, :page).nil?
           li class=(sidebar_class(:edit, :page) or sidebar_class(:show, :page))
             a href=""
-              i.fa.fa-angle-double-right
+              i.fa.fa-circle-o
               = @page
+              - unless @page.content.empty?
+                i.fa.fa-angle-left.pull-right
+            - unless @page.content.empty?
+              ul.treeview-menu
+                li
+                  a href="#" 
+                    i.fa.fa-circle-o
+                    | Level Three
 
     li.treeview class=(sidebar_class(:new, :snippet) || sidebar_class(:edit, :snippet) || sidebar_class(:index, :snippet) || sidebar_class(:show, :snippet))
       a href="#"
@@ -63,7 +71,12 @@ section.sidebar
           li class=(sidebar_class(:show, :snippet) or sidebar_class(:edit, :snippet))
             a href=""
               i.fa.fa-angle-double-right
-              = @snippet 
+              = @snippet
+    li
+      a href="#" 
+        i.fa.fa-circle-o
+        | Level One
+
 
     li.treeview class=(sidebar_class(:new, :document) || sidebar_class(:edit, :document) || sidebar_class(:index, :document) || sidebar_class(:show, :document))
       a href="#"

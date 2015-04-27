@@ -3,6 +3,15 @@ module Hicube
 
     layout 'application'
 
+    before_action :authenticate_user!, except: [:show]
+    before_filter :initialise_current_user, except: [:show]
+
+    def initialise_current_user
+      return unless user_signed_in?
+      User.current = current_user
+    end
+
+
     def permit_resource_params
       resource = controller_name.singularize.to_sym
       method = "#{resource}_params"

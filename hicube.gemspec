@@ -18,6 +18,12 @@ Gem::Specification.new do |s|
 
   s.add_dependency "rails", "~> 4.2.0"
 
+  # For inline editing
+  s.add_dependency "bootstrap-editable-rails"
+
+  # For Editable wysi support
+  s.add_dependency "bootstrap-wysihtml5-rails"
+
   # Image manas.add_dependencyent
   s.add_dependency "carrierwave-aws"
 

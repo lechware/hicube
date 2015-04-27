@@ -1,0 +1,7 @@
+/*
+ *
+ * Bootstrap Editable 
+ *= require bootstrap-wysihtml5
+ *= require bootstrap-editable
+ *= require_tree ./hicube/public
+ */

@@ -1,0 +1,11 @@
+= raw @page_content
+
+coffee:
+  $(document).ready ->
+    $.fn.editable.defaults.mode = 'inline'
+    $('.editable').editable
+      type: 'wysihtml5'
+      url: '/hicube/pages/about/contents/' + $(this).data('pk')
+      name: 'content[body]'
+
+    return
