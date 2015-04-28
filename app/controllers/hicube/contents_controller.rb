@@ -19,7 +19,6 @@ module Hicube
       :update,
     ]
 
-
     def update
       logger.debug "Updating Pages with #{params}"
       @content.update_attributes content_params

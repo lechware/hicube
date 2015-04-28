@@ -1,0 +1,11 @@
+.box-body
+  .form-group
+    = f.label :name
+    = f.text_field :name, placeholder: 'Enter ...', class: 'form-control'
+  .form-group
+    = f.label :body
+    = f.text_area :body, class: 'form-control'
+  
+.box-footer
+  button.btn.btn-primary[type="submit"]
+    | Submit 

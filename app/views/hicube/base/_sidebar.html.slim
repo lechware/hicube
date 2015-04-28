@@ -16,13 +16,7 @@ section.sidebar
           i.fa.fa-search
   ul.sidebar-menu
     li.header MAIN NAVIGATION
-    / li class=sidebar_class(:show, :dashboard)
-    /   = link_to dashboard_path
-    /     i.fa.fa-dashboard
-    /     span
-    /       | Dashboard
-    /     small.badge.pull-right.bg-green
-    /       | new
+    / li.treeview class=(sidebar_class(:new, :page) || sidebar_class(:edit, :page) || sidebar_class(:index, :page) || sidebar_class(:show, :page) || sidebar_class(:edit, :page_content) || sidebar_class(:new, :page_content))
     li.treeview class=(sidebar_class(:new, :page) || sidebar_class(:edit, :page) || sidebar_class(:index, :page) || sidebar_class(:show, :page))
       a href="#"
         i.fa.fa-file-code-o
@@ -43,14 +37,25 @@ section.sidebar
             a href=""
               i.fa.fa-circle-o
               = @page
-              - unless @page.content.empty?
-                i.fa.fa-angle-left.pull-right
-            - unless @page.content.empty?
-              ul.treeview-menu
-                li
-                  a href="#" 
-                    i.fa.fa-circle-o
-                    | Level Three
+        / - unless sidebar_class(:edit, :page).nil? and sidebar_class(:show, :page).nil? and sidebar_class(:edit, :page_content).nil? and sidebar_class(:new, :page_content).nil?
+          / li class=(sidebar_class(:edit, :page) or sidebar_class(:show, :page) or sidebar_class(:edit, :page_content) or sidebar_class(:new, :page_content))
+           / - unless sidebar_class(:edit, :page).nil? and sidebar_class(:show, :page).nil?
+           /  li class=(sidebar_class(:edit, :page) or sidebar_class(:show, :page))
+           /    a href=""
+           /      i.fa.fa-circle-o
+           /      = @page
+
+            /   i.fa.fa-angle-left.pull-right
+            / ul.treeview-menu
+            /   - @page.content.each do |content|
+            /     li class=sidebar_class(:edit, :page_content, {id: content, page_id: @page})
+            /       a href=edit_page_content_path(content, page_id: @page)
+            /         i.fa.fa-circle-o
+            /         | #{content}
+            /   li class=sidebar_class(:new, :page_content)
+            /     a href=new_page_content_path(page_id: @page) 
+            /       i.fa.fa-circle-o
+            /       | New
 
     li.treeview class=(sidebar_class(:new, :snippet) || sidebar_class(:edit, :snippet) || sidebar_class(:index, :snippet) || sidebar_class(:show, :snippet))
       a href="#"
@@ -72,11 +77,6 @@ section.sidebar
             a href=""
               i.fa.fa-angle-double-right
               = @snippet
-    li
-      a href="#" 
-        i.fa.fa-circle-o
-        | Level One
-
 
     li.treeview class=(sidebar_class(:new, :document) || sidebar_class(:edit, :document) || sidebar_class(:index, :document) || sidebar_class(:show, :document))
       a href="#"

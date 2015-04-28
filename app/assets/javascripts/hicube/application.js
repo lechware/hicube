@@ -20,10 +20,6 @@
 //= require codemirror/modes/markdown
 //= require codemirror/modes/slim
 
-// Bootstrap Editable
-//= require bootstrap-editable
-//= require bootstrap-editable-rails
-
 // Adminlte and corresponding Plugins
 //= require admin-lte
 //= require_tree .

@@ -35,7 +35,11 @@ module Hicube
     def sidebar_class(action, model, options = {})
       case action
       when :edit, :new
-        current_page?(eval("#{action}_#{model}_path")) ? :active : nil rescue nil # for edit
+        if options.nil?
+          current_page?(eval("#{action}_#{model}_path")) ? :active : nil rescue nil # for edit
+        else
+          current_page?(eval("#{action}_#{model}_path(options)")) ? :active : nil rescue nil # for edit
+        end
       when :index
         current_page?(eval("#{model.to_s.pluralize}_path")) ? :active : nil
       when :show

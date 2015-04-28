@@ -13,9 +13,6 @@
  *= require jquery.fileupload-ui
  *= require codemirror
 
- * Bootstrap Editable 
- *= require bootstrap-editable
-
  * Adminlte and corresponding css
  *= require admin-lte
  *= require skin-purple
