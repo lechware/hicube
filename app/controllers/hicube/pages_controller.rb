@@ -74,7 +74,7 @@ module Hicube
     private
 
     def page_params
-      params.require(:page).permit(:title, :parent, :body)
+      params.require(:page).permit(:title, :parent, :body, :seo_title, :seo_keywords, :seo_description)
     end
   
   end

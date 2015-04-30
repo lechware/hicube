@@ -28,7 +28,15 @@ module Hicube
     #   default:        false
 
     # SEO settings
+    field :st, type: String,
+      as:             :seo_title
 
+    field :sk, type: String,
+      as:             :seo_keywords
+
+    field :sd, type: String,
+      as:             :seo_description
+    
     # Validations
     validates_presence_of :title
     validates_uniqueness_of :title, scope: :parent

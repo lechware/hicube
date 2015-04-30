@@ -1,7 +1,7 @@
 module Hicube
   class Public::BaseController < Hicube::ApplicationController
 
-    layout 'application'
+    layout 'hicube'
 
     before_action :authenticate_user!, except: [:show]
     before_filter :initialise_current_user, except: [:show]
