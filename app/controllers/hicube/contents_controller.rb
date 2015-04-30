@@ -41,7 +41,7 @@ module Hicube
 
     # Nested attributes are currently not handled in basecontroller
     def load_resource
-      @page = Hicube::Page.find(params[:page_id])
+      @page = Hicube::Page.unscoped.find(params[:page_id])
       @content = @page.content.find_or_create_by(name: params[:id])
     end
 
