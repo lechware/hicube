@@ -1,6 +1,7 @@
 module Hicube  
   class Public::PagesController < Public::BaseController
 
+    skip_before_filter :verify_authenticity_token
     before_action :load_resource, except: [:mail]
 
     def show
@@ -20,7 +21,11 @@ module Hicube
 
     def mail
       PageMailer.contact_form(page_params).deliver_now
-      redirect_to :back, flash: {success: "Message Sent! We will be in touch shortly."}
+      if params[:page].has_key?(:success_page)
+        redirect_to "/#{params[:page][:success_page]}"
+      else
+        redirect_to :back, flash: {success: "Message Sent! We will be in touch shortly."}
+      end
     rescue
       redirect_to :back
     end
