@@ -1,6 +1,8 @@
 module Hicube
   class ApplicationMailer < ActionMailer::Base
-    default from: "from@example.com"
+    default from: ENV['DEFAULT_FROM_EMAIL'], 
+            to: ENV['DEFAULT_TO_EMAIL']
+            
     layout 'mailer'
   end
 end
