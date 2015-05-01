@@ -20,7 +20,7 @@ module Hicube
     end
 
     def mail
-      PageMailer.contact_form(page_params).deliver_now
+      PageMailer.notify(page_params).deliver_now
       if params[:page].has_key?(:success_page)
         redirect_to "/#{params[:page][:success_page]}"
       else
@@ -44,7 +44,7 @@ module Hicube
     private
 
     def page_params
-      params.require(:page).permit(:from, :to, :subject, :name, :email, :phone, :message)
+      params.require(:page).permit(:subject, :name, :reply_to, :phone, :message)
     end
   end
 end

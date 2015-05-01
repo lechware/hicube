@@ -1,12 +1,12 @@
 module Hicube
   class PageMailer < Hicube::ApplicationMailer
 
-    def contact_form(options = {})
+    def notify(options = {})
       logger.debug "Sending contact-form email using option - #{options}"
       @name = options[:name]
       @phone = options[:phone]
       @message = options[:message]
-      mail(from: options[:from], to: options[:to], reply_to: options[:email], subject: options[:subject])
+      mail(from: ENV['FROM_EMAIL'], to: ENV['TO_EMAIL'], reply_to: options[:reply_to], subject: options[:subject])
     end
 
   end

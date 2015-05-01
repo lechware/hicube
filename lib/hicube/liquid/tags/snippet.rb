@@ -17,7 +17,7 @@ module Hicube
 
         def render(context)
           unless @snippet.nil?
-            @snippet.body
+            ::Liquid::Template.parse(@snippet.body).render # @snippet.body
             # @template = ::Liquid::Template.parse(@snippet.body)
             # if @variables.length > 1
             #   @template.render @variables[1] => context[@variables[2].strip]
