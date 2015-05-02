@@ -7,6 +7,21 @@
       .form-group
         label Tracking Code
         = f.text_field :ga, class: 'form-control'
+  .box.box-primary
+    .box-header
+      .box-title
+        | Notification Email Template
+    .box-body
+  
+      .row
+        .col-xs-6
+          label HTML Body
+          = f.text_area :notify_email_html, rows: 10, class: 'form-control'
+
+        .col-xs-6
+          label Text Body
+          = f.text_area :notify_email_text, rows: 10, class: 'form-control'
+
 
     .box-footer
       button.btn.btn-primary type="submit" Save

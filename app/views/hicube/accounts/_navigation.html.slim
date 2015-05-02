@@ -9,7 +9,7 @@
 
 section.content-header
   h1
-    | #{heading} #{(current_page?(action: 'index') ? controller_name.camelize : controller_name.singularize.camelize)}
+    | #{heading} #{controller_name.singularize.camelize}
     small
       | #{subheading}
   ol.breadcrumb
@@ -17,9 +17,9 @@ section.content-header
       a href=pages_path
         i.fa.fa-dashboard
         |  Home
-    li class=(current_page?(eval("#{controller_name}_path")) ? :active : nil)
+    li class=(current_page?(eval("#{controller_name.singularize}_path")) ? :active : nil)
       a href="#{controller_name}_path"
         = controller_name.camelize
-    - unless current_page?(eval("#{controller_name}_path"))
+    - unless current_page?(eval("#{controller_name.singularize}_path"))
       li.active
         | #{heading} #{controller_name.singularize.camelize}

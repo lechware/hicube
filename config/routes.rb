@@ -19,7 +19,7 @@ Hicube::Engine.routes.draw do
 
   resource :tag
 
-  resources :accounts
+  resource :account
 end
 
 Rails.application.routes.draw do

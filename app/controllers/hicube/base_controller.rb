@@ -62,8 +62,11 @@ module Hicube
       # FIXME: Do not hard code engine name 
       resource_class = options[:class] || "Hicube::#{resource_name.singularize.camelize}".classify.constantize
 
-      resource = resource_class.unscoped.find(params[:id])
-
+      if resource_class == Hicube::Account
+        resource = Hicube::Account.first
+      else
+        resource = resource_class.unscoped.find(params[:id])
+      end
       # # Confirm current user has permission to view resource.
       # unless resource.account == current_account
       #   # TODO: log an audit event.

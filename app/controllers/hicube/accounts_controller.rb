@@ -44,13 +44,11 @@ module Hicube
       @account.update_attributes(accounts_params)
       @account.save!
 
-      respond_to do |format|
-        notify :notice, ::I18n.t('messages.resource.updated',
-          :type       => Hicube::Account.model_name.human,
-          :resource   => @account
-        )
-        format.html { redirect_to action: :show, id: @account }
-      end
+      notify :notice, ::I18n.t('messages.resource.updated',
+        :type       => Hicube::Account.model_name.human,
+        :resource   => @account
+      )
+      render action: :show, id: @account
     rescue Mongoid::Errors::Validations => e
       respond_to do |format|
         notify_now :error, ::I18n.t('messages.resource.not_valid',
@@ -64,7 +62,7 @@ module Hicube
     private
 
     def accounts_params
-      params.require(:account).permit(:ga)
+      params.require(:account).permit(:ga, :notify_email_html, :notify_email_text)
     end
   end
 end

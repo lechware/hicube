@@ -132,7 +132,7 @@ module Hicube
     def initialise_account_settings
       Rails.application.configure do 
         GA.tracker = Hicube::Account.first.ga unless Hicube::Account.first.nil? or Hicube::Account.first.ga.nil?
-      end
+      end if Rails.env.production? or Rails.env.staging?
     end
 
     def initialise_locale

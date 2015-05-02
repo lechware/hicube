@@ -13,7 +13,11 @@ module Hicube
     #
     field :ga, type: String
 
-    # FIXME: Validation that ga entry is only one and unique
+    field :notify_email_text, type: String
+
+    field :notify_email_html, type: String
+
+    validates_presence_of :ga #, :notify_email_html, :notify_email_text
 
 
   end

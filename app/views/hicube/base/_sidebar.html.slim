@@ -8,12 +8,12 @@ section.sidebar
       a[href="#"]
         i.fa.fa-circle.text-success
         |  Online
-  form.sidebar-form[action="#" method="get"]
-    .input-group
-      input.form-control[type="text" name="q" placeholder="Search..."]
-      span.input-group-btn
-        button#search-btn.btn.btn-flat[type="submit" name="search"]
-          i.fa.fa-search
+  / form.sidebar-form[action="#" method="get"]
+  /   .input-group
+  /     input.form-control[type="text" name="q" placeholder="Search..."]
+  /     span.input-group-btn
+  /       button#search-btn.btn.btn-flat[type="submit" name="search"]
+  /         i.fa.fa-search
   ul.sidebar-menu
     li.header MAIN NAVIGATION
     / li.treeview class=(sidebar_class(:new, :page) || sidebar_class(:edit, :page) || sidebar_class(:index, :page) || sidebar_class(:show, :page) || sidebar_class(:edit, :page_content) || sidebar_class(:new, :page_content))
@@ -98,4 +98,16 @@ section.sidebar
             a href=""
               i.fa.fa-angle-double-right
               = @document
+    li.treeview class=(sidebar_class(:edit, :account) || sidebar_class(:show, :account) || sidebar_class(:new, :account))
+      a href=account_path
+        i.fa.fa-cogs
+        span
+          | Settings
+        i.fa.fa-angle-left.pull-right
+      ul.treeview-menu
+        li class=(sidebar_class(:edit, :account) || sidebar_class(:show, :account) || sidebar_class(:new, :account))
+          a href=(Hicube::Account.first.nil? ? new_account_path : account_path(Hicube::Account.first))
+            i.fa.fa-angle-double-right
+            = t 'account'
+
     = yield :sidebar_menu

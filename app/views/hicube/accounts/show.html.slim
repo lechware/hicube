@@ -8,6 +8,9 @@ section.content
         .box-body
           | Google Analytics - 
           = @account.ga
+          hr
+          | Notify Email
+          p= @account.notify_email_html 
         .box-footer
           = link_to 'Edit', edit_account_path(@account), class: 'btn btn-success'
 
