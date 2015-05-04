@@ -22,6 +22,14 @@ module Hicube
         migration_template "generate_hicube_pages.rb", "db/migrate/generate_hicube_pages.rb"
       end
 
+      def copy_config
+        template "sitemap.rb", "config/sitemap.rb"
+        append_to_file 'public/robots.txt', "Sitemap:\n#{ENV['AWS_ASSET_HOST']}/sitemaps/#{Rails.application.class.to_s.split('::').first}/sitemap.xml.gz"
+      end
+
+      def copy_tasks
+        template "scheduler.rake", "lib/tasks/scheduler.rake"
+      end
     end
   end
 end

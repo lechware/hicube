@@ -88,6 +88,9 @@ Gem::Specification.new do |s|
   # Use SCSS for stylesheets
   s.add_dependency 'sass-rails', '~> 5.0'
 
+  # Manage sitemap generation
+  s.add_dependency 'sitemap_generator'
+
   # Slim Templates
   s.add_dependency 'slim-rails'
 
