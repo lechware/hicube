@@ -24,7 +24,7 @@ module Hicube
 
       def copy_config
         template "sitemap.rb", "config/sitemap.rb"
-        append_to_file 'public/robots.txt', "Sitemap: #{ENV['AWS_ASSET_HOST']}/#{ENV['S3_BUCKET_NAME']}/sitemaps/#{Rails.application.class.to_s.split('::').first}/sitemap.xml.gz"
+        append_to_file 'public/robots.txt', "\nSitemap: #{ENV['AWS_ASSET_HOST']}/#{ENV['S3_BUCKET_NAME']}/sitemaps/#{Rails.application.class.to_s.split('::').first}/sitemap.xml.gz"
       end
 
       def copy_tasks
