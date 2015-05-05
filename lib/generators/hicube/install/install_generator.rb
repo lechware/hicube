@@ -27,9 +27,9 @@ module Hicube
         append_to_file 'public/robots.txt', "\nSitemap: #{ENV['AWS_ASSET_HOST']}/#{ENV['S3_BUCKET_NAME']}/sitemaps/#{Rails.application.class.to_s.split('::').first}/sitemap.xml.gz"
       end
 
-      def copy_tasks
-        template "scheduler.rake", "lib/tasks/scheduler.rake"
-      end
+      # def copy_tasks
+      #   template "scheduler.rake", "lib/tasks/scheduler.rake"
+      # end
     end
   end
 end
