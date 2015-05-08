@@ -3,7 +3,7 @@ module Hicube
 
     layout 'hicube'
 
-    before_action :authenticate_user!, except: [:show]
+    before_action :authenticate_user!, except: [:show, :mail]
     before_filter :initialise_current_user, except: [:show]
 
     def initialise_current_user
