@@ -30,7 +30,7 @@
             | Additional Tags
           br
           = f.fields_for :content, @page.content do |c|
-            - if c.head
+            - if c.object.head
               .row
                 = c.hidden_field :head, value: '1'
                 .col-xs-3
