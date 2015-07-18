@@ -30,15 +30,16 @@
             | Additional Tags
           br
           = f.fields_for :content, @page.content do |c|
-            .row
-              = c.hidden_field :head, value: '1'
-              .col-xs-3
-                = c.text_field :name, class: 'form-control'
-              .col-xs-8
-                = c.text_field :body, class: 'form-control'
-              .col-xs-1
-                = c.check_box :_destroy, class: 'minimal'
-                |  Delete
+            - if c.head
+              .row
+                = c.hidden_field :head, value: '1'
+                .col-xs-3
+                  = c.text_field :name, class: 'form-control'
+                .col-xs-8
+                  = c.text_field :body, class: 'form-control'
+                .col-xs-1
+                  = c.check_box :_destroy, class: 'minimal'
+                  |  Delete
           br
         button#add-tag.btn.btn-default[type="button"] Add Additional Tag
         #tag-form style="display: none;"
