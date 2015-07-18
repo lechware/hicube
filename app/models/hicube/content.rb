@@ -17,6 +17,7 @@ module Hicube
 
     field :name, type: String
     field :body, type: String
+    field :head, type: Boolean, default: false
 
     validates_presence_of :name
     validates_uniqueness_of :name

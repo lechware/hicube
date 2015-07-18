@@ -17,6 +17,8 @@ module Hicube
     belongs_to :parent, class_name: 'Hicube::Page'
     embeds_many :content, class_name: 'Hicube::Content'
     
+    accepts_nested_attributes_for :content, allow_destroy: true
+
     field :tt, type: String,
       as:             :title
 
@@ -36,7 +38,7 @@ module Hicube
 
     field :sd, type: String,
       as:             :seo_description
-    
+
     # Validations
     validates_presence_of :title
     validates_uniqueness_of :title, scope: :parent
@@ -57,6 +59,10 @@ module Hicube
 
     def child?
       !self.parent.nil? and self.parent.present?
+    end
+
+    def head
+      self.content.where(head: true)
     end
   end
 end

@@ -1,50 +1,78 @@
-.box-body
-  .row
-    .col-xs-8
-      = f.label :title
-      = f.text_field :title, placeholder: 'Enter ...', disabled: (@page.title.eql?('Index') rescue false), class: 'form-control'
-    .col-xs-4
-      = f.label :parent
-      = f.collection_select :parent, Hicube::Page.parents,:id,:title,{include_blank: '', selected: parent_id},{class: 'form-control', disabled: (@page.title.eql?('Index') rescue false)}
-  br
-  - if current_page?(new_page_path)
-    .form-group
-      = f.label :body
+.row    
+  .col-xs-12
+    .box.box-warning class=(current_page?(new_page_path) ? 'expanded-box' : 'collapsed-box')
+      .box-header.with-border
+        h3.box-title Page Details
+        .box-tools.pull-right
+          button.btn.btn-box-tool[data-widget="collapse"]
+            i.fa.fa-plus
+      .box-body
+        .row
+          .col-xs-8
+            = f.label :name
+            = f.text_field :title, placeholder: 'Enter ...', required: true, disabled: (@page.title.eql?('Index') rescue false), class: 'form-control'
+          .col-xs-4
+            = f.label :parent
+            = f.collection_select :parent, Hicube::Page.parents,:id,:title,{include_blank: '', selected: parent_id},{class: 'form-control', disabled: (@page.title.eql?('Index') rescue false)}
+        br
+        .form-group
+          = f.label :seo_title
+          = f.text_field :seo_title, class: 'form-control'
+        .form-group
+          = f.label :seo_keywords
+          = f.text_field :seo_keywords, class: 'form-control'
+        .form-group
+          = f.label :seo_description
+          = f.text_field :seo_description, class: 'form-control'
+        
+        - unless current_page?(new_page_path) or @page.content.empty?
+          strong
+            | Additional Tags
+          br
+          = f.fields_for :content, @page.content do |c|
+            .row
+              = c.hidden_field :head, value: '1'
+              .col-xs-3
+                = c.text_field :name, class: 'form-control'
+              .col-xs-8
+                = c.text_field :body, class: 'form-control'
+              .col-xs-1
+                = c.check_box :_destroy, class: 'minimal'
+                |  Delete
+          br
+        button#add-tag.btn.btn-default[type="button"] Add Additional Tag
+        #tag-form style="display: none;"
+          = f.fields_for :content, Hicube::Content.new do |c|
+            .row
+              = c.hidden_field :head, value: '1'
+              .col-xs-3
+                = c.text_field :name, placeholder: 'Name', class: 'form-control'
+              .col-xs-8
+                = c.text_field :body, placeholder: 'Content', class: 'form-control'
+              .col-xs-1
+                  = c.check_box :_destroy, class: 'minimal'
+                  |  Delete
+
+- if current_page?(new_page_path)
+  .form-group
+    = f.label :body
+    - if current_page?(new_page_path)
+      = f.text_area :body, id: "textarea", value: "\n\n\n\n\n\n\n", class: 'form-control'
+    - else
       = f.text_area :body, id: "textarea", class: 'form-control'
-  - else
-    .row
-      .col-xs-12
-        iframe src="/#{@page.slug}/edit" width="100%" height="500px"
-    br
-    .row    
-      .col-xs-12
-        .box.box-warning
-          .box-header.with-border
-            h3.box-title Raw Code
-            .box-tools.pull-right
-              button.btn.btn-box-tool[data-widget="collapse"]
-                i.fa.fa-minus
-          .box-body
-            = f.text_area :body, id: "textarea", class: 'form-control'
-  br
-  .row    
+- else
+  .row
     .col-xs-12
-      .box.box-warning.collapsed-box
-        .box-header.with-border
-          h3.box-title SEO Settings
-          .box-tools.pull-right
-            button.btn.btn-box-tool[data-widget="collapse"]
-              i.fa.fa-plus
-        .box-body
-          .form-group
-            = f.label :seo_title
-            = f.text_field :seo_title, class: 'form-control'
-          .form-group
-            = f.label :seo_keywords
-            = f.text_field :seo_keywords, class: 'form-control'
-          .form-group
-            = f.label :seo_description
-            = f.text_field :seo_description, class: 'form-control'
-.box-footer
-  button.btn.btn-primary[type="submit"]
-    | Submit 
+      .nav-tabs-custom
+        ul.nav.nav-tabs
+          li.active
+            a[href="#raw" data-toggle="tab"]
+              | Raw Content
+          li
+            a[href="#wysiwig" data-toggle="tab"]
+              | WYSIWIG
+        .tab-content
+          #raw.tab-pane.active
+            = f.text_area :body, id: "textarea", class: 'form-control .codeMirror'
+          #wysiwig.tab-pane
+            iframe src="/#{@page.slug}/edit" width="100%" height="100%" frameBorder=0 style="height: 100vh"

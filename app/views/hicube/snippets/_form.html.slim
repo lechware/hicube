@@ -5,7 +5,10 @@
     
   .form-group
     = f.label :body
-    = f.text_area :body, id: "textarea", rows: "20", class: 'form-control'
+    - if current_page?(new_snippet_path)
+      = f.text_area :body, id: "textarea", value: "\n\n\n\n\n\n\n\n", class: 'form-control'
+    - else
+      = f.text_area :body, id: "textarea", class: 'form-control'
 .box-footer
   button.btn.btn-primary[type="submit"]
     | Submit 

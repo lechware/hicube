@@ -19,6 +19,7 @@
 //= require codemirror/modes/ruby
 //= require codemirror/modes/markdown
 //= require codemirror/modes/slim
+//= require codemirror/addons/selection/active-line
 
 // Adminlte and corresponding Plugins
 //= require admin-lte
@@ -40,7 +41,9 @@ $(function () {
     mode: "application/x-slim",
     matchBrackets: true,
     tabSize: 2,
-    indentWithTabs: true
+    indentWithTabs: true,
+    lineWrapping: true,
+    styleActiveLine: true
   });
 
 

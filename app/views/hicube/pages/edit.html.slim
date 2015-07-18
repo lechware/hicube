@@ -1,9 +1,7 @@
 section.content
-  .row
-    .col-md-12
-      .box.box-warning
-        .box-header
-          h3.box-title
-            | Page Details
-        = form_for @page, as: :page, url: page_path(@page), role: 'form' do |f|
-          = render partial: 'form', locals: { f: f, parent_id: ((@page.present? and @page.junction?) ? @page.parent.id : '')}
+  = form_for @page, as: :page, url: page_path(@page), role: 'form' do |f|
+    = render partial: 'form', locals: { f: f, parent_id: ((@page.present? and @page.junction?) ? @page.parent.id : '')}
+    button.btn.btn-default.pull-right[type="submit"]
+      | Save
+    br
+    br

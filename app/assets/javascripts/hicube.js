@@ -15,7 +15,7 @@
         //extend wysihtml5 manually as $.extend not recursive 
         this.options.wysihtml5 = $.extend({}, Wysihtml5.defaults.wysihtml5, options.wysihtml5);
     };
-
+    
     $.fn.editableutils.inherit(Wysihtml5, $.fn.editabletypes.abstractinput);
 
     $.extend(Wysihtml5.prototype, {

@@ -85,7 +85,7 @@ module Hicube
     private
 
     def app_name
-      Rails.application.class.to_s.split("::").first
+      t('app.name') || Rails.application.class.to_s.split("::").first 
     end
 
     def action_controller_helpers

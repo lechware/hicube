@@ -47,7 +47,7 @@ module Hicube
           current_page?(eval("#{model}_path")) ? :active : nil rescue nil
         else
           current_page?(eval("#{model}_path(options)")) ? :active : nil rescue nil
-        end
+        end        
       else
         nil
       end

@@ -1,15 +1,17 @@
 - if current_page?(action: 'new')
   - heading = 'New'
-  - subheading = 'Add'
-- elsif current_page?(action: 'new')
+  - subheading = 'Page'
+- elsif current_page?(action: 'index')
+  - heading = 'Pages'
+  - subheading = 'All'
+- elsif current_page?(action: 'edit')
   - heading = 'Edit'
-  - subheading = 'Update'
-- else
-  - subheading = 'List'
+  - subheading = "#{@page}"
 
 section.content-header
   h1
-    | #{heading} #{(current_page?(action: 'index') ? controller_name.camelize : controller_name.singularize.camelize)}
+    / | #{heading} #{(current_page?(action: 'index') ? controller_name.camelize : controller_name.singularize.camelize)}
+    | #{heading}
     small
       | #{subheading}
   ol.breadcrumb
