@@ -21,13 +21,22 @@ module Hicube
 
     def mail
       PageMailer.notify(page_params).deliver_now
-      if params[:page].has_key?(:success_page)
-        redirect_to "/#{params[:page][:success_page]}"
-      else
-        redirect_to :back, flash: {success: "Message Sent! We will be in touch shortly."}
+      
+      respond_to do |format|
+        format.html {
+          if params[:page].has_key?(:success_page)
+            redirect_to "/#{params[:page][:success_page]}"
+          else
+            redirect_to :back, flash: {success: "Message Sent! We will be in touch shortly."}
+          end
+        }
+        format.json { render json: 'Message sent!', status: 200}
       end
     rescue
-      redirect_to :back
+      respond_to do |format|
+        format.html { redirect_to :back }
+        format.json { render json: page_params, status: :unprocessable_entity }
+      end
     end
 
     def edit
