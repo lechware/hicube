@@ -4,6 +4,7 @@
 //= require bootstrap-editable-rails
 //= require_tree ./hicube/public
 
+
 // Copied this from https://github.com/vitalets/x-editable/blob/master/src/inputs-ext/wysihtml5/wysihtml5.js
 
 (function ($) {
@@ -106,7 +107,18 @@
         @default {stylesheets: false}
         **/        
         wysihtml5: {
-            stylesheets: false //see https://github.com/jhollingworth/bootstrap-wysihtml5/issues/183
+          stylesheets: false, //see https://github.com/jhollingworth/bootstrap-wysihtml5/issues/183
+          toolbar: {
+            "font-styles": true, //Font styling, e.g. h1, h2, etc. Default true
+            "emphasis": true, //Italics, bold, etc. Default true
+            "lists": true, //(Un)ordered lists, e.g. Bullets, Numbers. Default true
+            "html": true, //Button which allows you to edit the generated HTML. Default false
+            "link": false, //Button to insert a link. Default true
+            "image": false, //Button to insert an image. Default true,
+            "color": true, //Button to change color of font  
+            "blockquote": false, //Blockquote  
+            "size": "sm" //default: none, other options are xs, sm, lg
+          }
         }
     });
 
