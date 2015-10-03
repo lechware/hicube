@@ -39,7 +39,7 @@ Gem::Specification.new do |s|
   s.add_dependency "google-analytics-rails"
 
   # Mongoid
-  s.add_dependency "mongoid"
+  s.add_dependency "mongoid", '~> 5.0.0'
 
   # For migrations
   s.add_dependency "mongoid_rails_migrations"
