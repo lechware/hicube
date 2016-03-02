@@ -1,10 +1,10 @@
 section.content
   .row
     .col-md-12
-      .box
-        .box-header
-          h3.box-title
-            | Snippets
+      .box.box-primary
+        / .box-header
+        /   h3.box-title
+        /     | Snippets
         .box-body.table-responsive
           table#datatable.table.table-bordered.table-striped
             thead
@@ -21,3 +21,5 @@ section.content
                       = s.name
                     .col-md-1
                       = link_to t('edit'), edit_snippet_path(s), class: 'btn btn-sm btn-primary'                
+        .box-footer
+          = link_to 'New Snippet', new_snippet_path, class: 'btn btn-flat btn-success pull-right'

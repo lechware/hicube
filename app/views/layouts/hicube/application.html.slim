@@ -10,7 +10,8 @@ html
     = csrf_meta_tags
 
   - if user_signed_in?
-    body.skin-purple
+    body.skin-blue
+      /.sidebar-collapse.sidebar-mini
       .wrapper
         = render partial: 'header'
         aside.main-sidebar

@@ -50,19 +50,17 @@ module Hicube
       )
       render action: :show, id: @account
     rescue Mongoid::Errors::Validations => e
-      respond_to do |format|
-        notify_now :error, ::I18n.t('messages.resource.not_valid',
-          :type     => Hicube::Account.model_name.human,
-          :errors   => @account.errors.full_messages.to_sentence
-        )
-        format.html { render :action => :new, :status => 422 }
-      end
+      notify_now :error, ::I18n.t('messages.resource.not_valid',
+        :type     => Hicube::Account.model_name.human,
+        :errors   => @account.errors.full_messages.to_sentence
+      )
+      render :action => :edit
     end
 
     private
 
     def accounts_params
-      params.require(:account).permit(:ga, :notify_email_html, :notify_email_text)
+      params.require(:account).permit(:ga, :domain, :notify_email_html, :notify_email_text)
     end
   end
 end

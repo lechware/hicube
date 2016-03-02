@@ -1,7 +1,9 @@
 section.content
   = form_for @page, as: :page, url: page_path(@page), role: 'form' do |f|
-    = render partial: 'form', locals: { f: f, parent_id: ((@page.present? and !@page.parent.nil?) ? @page.parent.id.to_s : '')}
-    button.btn.btn-default.pull-right[type="submit"]
-      | Save
-    br
-    br
+    .box.no-border
+      .box-body
+        = render partial: 'form', locals: { f: f, parent_id: ((@page.present? and !@page.parent.nil?) ? @page.parent.id.to_s : '')}
+      .box-footer.no-border
+        button.btn.btn-flat.btn-primary.pull-right[type="submit"]
+          | Save
+        = link_to 'Delete', page_path(@page), method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-flat btn-danger'

@@ -1,21 +1,21 @@
 section.sidebar
-  .user-panel
-    .pull-left.image
-      = image_tag 'avatar.png', alt: "User Image", class: 'img-circle'
-    .pull-left.info
-      p
-        | Hello, #{current_user.name}
-      a[href="#"]
-        i.fa.fa-circle.text-success
-        |  Online
-  / form.sidebar-form[action="#" method="get"]
-  /   .input-group
-  /     input.form-control[type="text" name="q" placeholder="Search..."]
-  /     span.input-group-btn
-  /       button#search-btn.btn.btn-flat[type="submit" name="search"]
-  /         i.fa.fa-search
+  / .user-panel
+  /   .pull-left.image
+  /     = image_tag 'avatar.png', alt: "User Image", class: 'img-circle'
+  /   .pull-left.info
+  /     p
+  /       | Hello, #{current_user.name}
+  /     a[href="#"]
+  /       i.fa.fa-circle.text-success
+  /       |  Online
+  form.sidebar-form[action="#" method="get"]
+    .input-group
+      input.form-control[type="text" name="q" placeholder="Search..."]
+      span.input-group-btn
+        button#search-btn.btn.btn-flat[type="submit" name="search"]
+          i.fa.fa-search
   ul.sidebar-menu
-    li.header MAIN NAVIGATION
+    li.header NAVIGATION
     / li.treeview class=(sidebar_class(:new, :page) || sidebar_class(:edit, :page) || sidebar_class(:index, :page) || sidebar_class(:show, :page) || sidebar_class(:edit, :page_content) || sidebar_class(:new, :page_content))
     li.treeview class=(sidebar_class(:new, :page) || sidebar_class(:edit, :page) || sidebar_class(:index, :page) || sidebar_class(:show, :page))
       a href="#"
@@ -24,39 +24,25 @@ section.sidebar
           = t 'pages'
         i.fa.fa-angle-left.pull-right
       ul.treeview-menu
-        li class=sidebar_class(:index, :page)
-          a href=pages_path
-            i.fa.fa-angle-double-right
-            = t 'All'
+        / li class=sidebar_class(:index, :page)
+        /   a href=pages_path
+        /     i.fa.fa-angle-double-right
+        /     = t 'All'
+        - Hicube::Page.unscoped.parents.each do |p|
+          li class=(sidebar_class(:edit, :page, p) || sidebar_class(:show, :page, p))
+            a href=edit_page_path(p)
+              i.fa.fa-angle-double-right
+              = p
         li class=sidebar_class(:new, :page)
           a href=new_page_path
             i.fa.fa-angle-double-right
             = t 'new'
-        - unless sidebar_class(:edit, :page).nil? and sidebar_class(:show, :page).nil?
-          li class=(sidebar_class(:edit, :page) or sidebar_class(:show, :page))
-            a href=""
-              i.fa.fa-circle-o
-              = @page
-        / - unless sidebar_class(:edit, :page).nil? and sidebar_class(:show, :page).nil? and sidebar_class(:edit, :page_content).nil? and sidebar_class(:new, :page_content).nil?
-          / li class=(sidebar_class(:edit, :page) or sidebar_class(:show, :page) or sidebar_class(:edit, :page_content) or sidebar_class(:new, :page_content))
-           / - unless sidebar_class(:edit, :page).nil? and sidebar_class(:show, :page).nil?
-           /  li class=(sidebar_class(:edit, :page) or sidebar_class(:show, :page))
-           /    a href=""
-           /      i.fa.fa-circle-o
-           /      = @page
-
-            /   i.fa.fa-angle-left.pull-right
-            / ul.treeview-menu
-            /   - @page.content.each do |content|
-            /     li class=sidebar_class(:edit, :page_content, {id: content, page_id: @page})
-            /       a href=edit_page_content_path(content, page_id: @page)
-            /         i.fa.fa-circle-o
-            /         | #{content}
-            /   li class=sidebar_class(:new, :page_content)
-            /     a href=new_page_content_path(page_id: @page) 
-            /       i.fa.fa-circle-o
-            /       | New
-
+        / - unless sidebar_class(:edit, :page).nil? and sidebar_class(:show, :page).nil?
+        /   li class=(sidebar_class(:edit, :page) or sidebar_class(:show, :page))
+        /     a href=""
+        /       i.fa.fa-circle-o
+        /       = @page
+        
     li.treeview class=(sidebar_class(:new, :snippet) || sidebar_class(:edit, :snippet) || sidebar_class(:index, :snippet) || sidebar_class(:show, :snippet))
       a href="#"
         i.fa.fa-code
@@ -64,19 +50,24 @@ section.sidebar
           | Snippets
         i.fa.fa-angle-left.pull-right
       ul.treeview-menu
-        li class=sidebar_class(:index, :snippet)
-          a href=snippets_path
-            i.fa.fa-angle-double-right
-            = t 'list'
+        / li class=sidebar_class(:index, :snippet)
+        /   a href=snippets_path
+        /     i.fa.fa-angle-double-right
+        /     = t 'list'
+        - Hicube::Snippet.each do |s|
+          li class=(sidebar_class(:edit, :snippet, s) || sidebar_class(:show, :snippet, s))
+            a href=edit_snippet_path(s)
+              i.fa.fa-angle-double-right
+              = s
         li class=sidebar_class(:new, :snippet)
           a href=new_snippet_path
             i.fa.fa-angle-double-right
             = t 'new'
-        - unless sidebar_class(:edit, :snippet).nil? and sidebar_class(:show, :page).nil?
-          li class=(sidebar_class(:show, :snippet) or sidebar_class(:edit, :snippet))
-            a href=""
-              i.fa.fa-angle-double-right
-              = @snippet
+        / - unless sidebar_class(:edit, :snippet).nil? and sidebar_class(:show, :page).nil?
+        /   li class=(sidebar_class(:show, :snippet) or sidebar_class(:edit, :snippet))
+        /     a href=""
+        /       i.fa.fa-angle-double-right
+        /       = @snippet
 
     li.treeview class=(sidebar_class(:new, :document) || sidebar_class(:edit, :document) || sidebar_class(:index, :document) || sidebar_class(:show, :document))
       a href="#"
@@ -98,16 +89,16 @@ section.sidebar
             a href=""
               i.fa.fa-angle-double-right
               = @document
-    li.treeview class=(sidebar_class(:edit, :account) || sidebar_class(:show, :account) || sidebar_class(:new, :account))
-      a href=account_path
+    li.treeview class=(sidebar_class(:edit, :account, Hicube::Account.first) || sidebar_class(:show, :account, Hicube::Account.first) || sidebar_class(:new, :account))
+      a href=account_path(Hicube::Account.first)
         i.fa.fa-cogs
         span
           | Settings
-        i.fa.fa-angle-left.pull-right
-      ul.treeview-menu
-        li class=(sidebar_class(:edit, :account) || sidebar_class(:show, :account) || sidebar_class(:new, :account))
-          a href=(Hicube::Account.first.nil? ? new_account_path : account_path(Hicube::Account.first))
-            i.fa.fa-angle-double-right
-            = t 'account'
+        / i.fa.fa-angle-left.pull-right
+      / ul.treeview-menu
+      /   li class=(sidebar_class(:edit, :account) || sidebar_class(:show, :account) || sidebar_class(:new, :account))
+      /     a href=(Hicube::Account.first.nil? ? new_account_path : account_path(Hicube::Account.first))
+      /       i.fa.fa-angle-double-right
+      /       = t 'account'
 
     = yield :sidebar_menu

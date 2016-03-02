@@ -5,8 +5,8 @@
   - heading = 'Pages'
   - subheading = 'All'
 - elsif current_page?(action: 'edit')
-  - heading = 'Edit'
-  - subheading = "#{@page}"
+  - heading = "#{@page}"
+  - subheading = 'Edit'
 
 section.content-header
   h1
@@ -24,4 +24,4 @@ section.content-header
         = controller_name.camelize
     - unless current_page?(eval("#{controller_name}_path"))
       li.active
-        | #{heading} #{controller_name.singularize.camelize}
+        | #{heading}

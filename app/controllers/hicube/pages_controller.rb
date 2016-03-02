@@ -43,6 +43,25 @@ module Hicube
       end
     end
 
+    def destroy
+      @page.destroy
+      respond_to do |format|
+        notify :notice, ::I18n.t('messages.resource.destroyed',
+          :type       => Hicube::Page.model_name.human,
+          :resource   => @page
+        )
+        format.html { redirect_to action: :index }
+      end
+    rescue
+      respond_to do |format|
+        notify :error, ::I18n.t('messages.resource.not_valid',
+          :type     => Hicube::Page.model_name.human,
+          :errors   => @page.errors.full_messages.to_sentence
+        )
+        format.html { redirect_to action: :edit, id: @page }
+      end
+    end
+
     def edit
     end
 

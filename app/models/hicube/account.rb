@@ -17,7 +17,9 @@ module Hicube
 
     field :notify_email_html, type: String
 
-    validates_presence_of :ga #, :notify_email_html, :notify_email_text
+    field :domain, type: String
+
+    validates_presence_of :ga, :domain #, :notify_email_html, :notify_email_text
 
 
   end

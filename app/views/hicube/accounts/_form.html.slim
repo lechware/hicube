@@ -5,13 +5,16 @@
         | Google Analytics
     .box-body
       .form-group
-        label Tracking Code
-        = f.text_field :ga, class: 'form-control'
-  .box.box-primary
-    .box-header
-      .box-title
+        .row
+          .col-xs-6
+            label Domain
+            = f.text_field :domain, class: 'form-control'
+          .col-xs-6
+            label Analytics
+            = f.text_field :ga, class: 'form-control'
+  
+      .page-header
         | Notification Email Template
-    .box-body
   
       .row
         .col-xs-6
@@ -24,4 +27,5 @@
 
 
     .box-footer
-      button.btn.btn-primary type="submit" Save
+      button.btn.btn-flat.btn-primary.pull-right type="submit" Save
+      = link_to 'Cancel', account_path(@account), class: 'btn btn-flat btn-default' 

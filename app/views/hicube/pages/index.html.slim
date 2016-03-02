@@ -28,3 +28,5 @@ section.content
                         = child.title
                       .col-xs-1
                         = link_to t('edit'), edit_page_path(child), class: 'btn btn-sm btn-primary'                
+        .box-footer
+          = link_to 'New Page', new_page_path, class: 'btn btn-flat btn-success pull-right'

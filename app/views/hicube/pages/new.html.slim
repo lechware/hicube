@@ -1,7 +1,9 @@
 section.content
   = form_for :page, url: pages_path, role: 'form' do |f|
-    = render partial: 'form', locals: { f: f, parent_id: ((@page.present? and @page.junction?) ? @page.parent.id : '') }
-    button.btn.btn-primary.pull-right[type="submit"]
-      | Submit 
-    br
-    br
+    .box.no-border
+      .box-body
+        = render partial: 'form', locals: { f: f, parent_id: ((@page.present? and @page.junction?) ? @page.parent.id : '') }
+      .box-footer.no-border
+        button.btn.btn-flat.btn-primary.pull-right[type="submit"]
+          | Submit 
+        = link_to 'Cancel', pages_path, class: 'btn btn-flat btn-default'

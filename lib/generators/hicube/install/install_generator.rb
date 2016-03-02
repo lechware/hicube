@@ -6,7 +6,7 @@ module Hicube
       include Rails::Generators::Migration
 
       source_root File.expand_path('../templates', __FILE__)
-      desc "add migrations"
+      desc "add migrations and configurations"
 
       def self.next_migration_number(path)
         unless @prev_migration_nr
@@ -18,8 +18,13 @@ module Hicube
       end
 
       def copy_migrations
-        migration_template "generate_hicube_users.rb", "db/migrate/generate_hicube_users.rb"
-        migration_template "generate_hicube_pages.rb", "db/migrate/generate_hicube_pages.rb"
+        copy_migration "generate_hicube_accounts"
+        copy_migration "generate_hicube_users"
+        copy_migration "generate_hicube_pages"
+        # migration_template "generate_hicube_accounts.rb", "db/migrate/generate_hicube_accounts.rb"
+        # migration_template "generate_hicube_users.rb", "db/migrate/generate_hicube_users.rb", "--force"
+        # migration_template "generate_hicube_pages.rb", "db/migrate/generate_hicube_pages.rb"
+        rake "db:migrate"
       end
 
       def copy_config
@@ -30,6 +35,15 @@ module Hicube
       # def copy_tasks
       #   template "scheduler.rake", "lib/tasks/scheduler.rake"
       # end
+      private
+
+      def copy_migration(filename)
+        if self.class.migration_exists?("db/migrate", "#{filename}")
+          say_status("skipped", "Migration #{filename}.rb already exists")
+        else
+          migration_template "#{filename}.rb", "db/migrate/#{filename}.rb"
+        end
+      end
     end
   end
 end

@@ -29,7 +29,7 @@ module Hicube
           :type       => Hicube::Snippet.model_name.human,
           :resource   => @snippet
         )
-        format.html { redirect_to action: :index }
+        format.html { redirect_to action: :edit, id: @snippet.id }
       end
     rescue Mongoid::Errors::Validations => e
       respond_to do |format|
@@ -42,6 +42,23 @@ module Hicube
     end
 
     def edit
+    end
+
+    def destroy
+      @snippet.destroy
+      respond_to do |format|
+        notify :notice, ::I18n.t('messages.resource.destroyed',
+          :type       => Hicube::Snippet.model_name.human,
+          :resource   => @snippet
+        )
+        format.html { redirect_to action: :index }
+      end
+    rescue
+      notify_now :error, ::I18n.t('messages.resource.not_valid',
+        :type     => Hicube::Snippet.model_name.human,
+        :errors   => @snippet.errors.full_messages.to_sentence
+      )
+      format.html { redirect_to action: :show, id: @snippet }
     end
 
     def index
@@ -61,7 +78,7 @@ module Hicube
           :type       => Hicube::Snippet.model_name.human,
           :resource   => @snippet
         )
-        format.html { redirect_to action: :index }
+        format.html { redirect_to action: :edit }
       end
     rescue Mongoid::Errors::Validations => e
       respond_to do |format|
@@ -69,7 +86,7 @@ module Hicube
           :type     => Hicube::Snippet.model_name.human,
           :errors   => @snippet.errors.full_messages.to_sentence
         )
-        format.html { render :action => :new, :status => 422 }
+        format.html { render :action => :edit }
       end
     end
 

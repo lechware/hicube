@@ -2,15 +2,20 @@ section.content
   .row
     .col-xs-12
       .box.box-primary
-        .box-header
-          .box-title
-            | Account Settings
         .box-body
-          | Google Analytics - 
-          = @account.ga
-          hr
-          | Notify Email
-          p= @account.notify_email_html 
+          dl.dl-horizontal
+            dt
+              | Domain
+            dd
+              = @account.domain
+            dt
+              | Google Anaytics
+            dd
+              = @account.ga
+            dt
+              | Email Template
+            dd
+              = @account.notify_email_html 
         .box-footer
-          = link_to 'Edit', edit_account_path(@account), class: 'btn btn-success'
+          = link_to 'Edit', edit_account_path(@account), class: 'btn btn-primary btn-flat pull-right'
 

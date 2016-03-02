@@ -6,6 +6,9 @@ module Hicube
 
     include Mongoid::Document
     include Mongoid::Timestamps
+
+    # Associations
+    belongs_to :account, class_name: 'Hicube::Account'
     
     # Include default devise modules. Others available are:
     # :confirmable, :lockable, :timeoutable and :omniauthable
