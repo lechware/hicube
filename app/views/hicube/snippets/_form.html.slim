@@ -11,7 +11,10 @@
       = f.text_area :body, id: "textarea", class: 'form-control'
 .box-footer
   button.btn.btn-flat.btn-primary.pull-right[type="submit"]
-    | Submit 
+    - if current_page?(new_snippet_path)
+      | Submit 
+    - else
+      | Save
   - if current_page?(new_snippet_path)
     = link_to 'Cancel', snippets_path, class: 'btn btn-flat btn-default'
   - else

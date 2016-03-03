@@ -1,11 +1,11 @@
 - if current_page?(action: 'new')
   - heading = 'New'
   - subheading = 'Add'
-- elsif current_page?(action: 'new')
-  - heading = 'Edit'
-  - subheading = 'Update'
+- elsif current_page?(action: 'edit')
+  / - heading = 'Edit'
+  - subheading = 'Edit'
 - else
-  - subheading = 'List'
+  - subheading = ''
 
 section.content-header
   h1

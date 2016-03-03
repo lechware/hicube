@@ -92,12 +92,26 @@
             iframe src="/#{@page.slug}/edit" width="100%" height="100%" frameBorder=0 style="height: 100vh"
         #details.tab-pane class=(@page.nil? || @page.new_record? || current_page?(new_page_path) ? 'active' : nil)
           .row
-            .col-xs-8
+            .col-xs-3
               = f.label :name
               = f.text_field :title, placeholder: 'Enter ...', disabled: (@page.title.eql?('Index') rescue false), class: 'form-control'
-            .col-xs-4
+            .col-xs-3
               = f.label :parent
               = f.collection_select :parent, Hicube::Page.parents,:id,:title,{include_blank: '', selected: parent_id},{class: 'form-control', disabled: (@page.title.eql?('Index') rescue false)}
+            .col-xs-2
+              = f.label :link_order
+              = f.select :order, 1..Hicube::Page.count, {}, {class: 'form-control'}
+            .col-xs-2
+              .checkbox.iCheck style="padding-top: 10px;"
+              label= f.check_box :header, class: 'minimal'
+              strong
+                |  Appear in Header
+            .col-xs-2
+              .checkbox.iCheck style="padding-top: 10px;"
+              label= f.check_box :footer, class: 'minimal'
+              strong
+                |  Appear in Footer
+
           br
           .form-group
             = f.label :seo_title

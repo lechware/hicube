@@ -29,14 +29,32 @@ section.sidebar
         /     i.fa.fa-angle-double-right
         /     = t 'All'
         - Hicube::Page.unscoped.parents.each do |p|
-          li class=(sidebar_class(:edit, :page, p) || sidebar_class(:show, :page, p))
-            a href=edit_page_path(p)
-              i.fa.fa-angle-double-right
-              = p
+          - unless p.junction?
+            li class=(sidebar_class(:edit, :page, p) || sidebar_class(:show, :page, p))
+              a href=edit_page_path(p)
+                i.fa.fa-angle-double-right
+                = p
+          - else
+            li class=(sidebar_class(:edit, :page, p) || sidebar_class(:show, :page, p) || ((@page.nil? || @page.parent != p) ? false : sidebar_class(:edit, :page)))
+              a href="#"
+                i.fa.fa-angle-double-right
+                = p
+                i.fa.fa-angle-left.pull-right
+              ul.treeview-menu
+                li class=(sidebar_class(:edit, :page, p) || sidebar_class(:show, :page, p))
+                  a href=edit_page_path(p)
+                    i.fa.fa-circle-o
+                    = p
+                - p.children.each do |c|
+                  li class=(sidebar_class(:edit, :page, c) || sidebar_class(:show, :page, c))
+                    a href=edit_page_path(c)
+                      i.fa.fa-circle-o
+                      = c 
+
         li class=sidebar_class(:new, :page)
           a href=new_page_path
             i.fa.fa-angle-double-right
-            = t 'new'
+            = t 'new_page'
         / - unless sidebar_class(:edit, :page).nil? and sidebar_class(:show, :page).nil?
         /   li class=(sidebar_class(:edit, :page) or sidebar_class(:show, :page))
         /     a href=""

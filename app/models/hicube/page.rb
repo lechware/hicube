@@ -33,6 +33,21 @@ module Hicube
     field :bd, type: String,
       as:             :body
 
+    # appear in header
+    field :hd, type: Boolean, 
+      as:             :header,
+      default:        true
+
+    # appear in footer
+    field :ft, type: Boolean, 
+      as:             :footer,
+      default:        true
+
+    # Order for links
+    field :od, type: Integer,
+      as:             :order,
+      default:        0
+
     # field :jt, type: Boolean, # Saving as String, so don't have to do transalation from String to Boolean in controller
     #   as:             :junction,
     #   default:        false
@@ -48,7 +63,7 @@ module Hicube
       as:             :seo_description
 
     # Validations
-    validates_presence_of :title
+    validates_presence_of :title, :header, :footer, :order
     validates_uniqueness_of :title, scope: :parent
 
     #
@@ -56,6 +71,9 @@ module Hicube
     #
     default_scope -> { ne(_slugs: ["index"]) }
     scope :parents, -> { where(parent: nil) }
+    scope :headers, -> { where(header: true).asc(:order) }
+    scope :footers, -> { where(footer: true).asc(:order) }
+    # scope :children, -> (parent) {where(parent: parent)}
 
     def to_s
       self.title

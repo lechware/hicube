@@ -99,7 +99,7 @@ module Hicube
       params[:page][:content_attributes].reject! { |k,v| v[:name].empty? and v[:head] } rescue
       logger.debug "Page after removing unwanted head content #{params}"
 
-      params.require(:page).permit(:title, :parent, :body, :seo_title, :seo_keywords, :seo_description, content_attributes: [:id, :name, :body, :head, :_destroy])
+      params.require(:page).permit(:title, :parent, :header, :footer, :order, :body, :seo_title, :seo_keywords, :seo_description, content_attributes: [:id, :name, :body, :head, :_destroy])
     end
   
   end
