@@ -57,9 +57,9 @@ module Hicube
       '/'
     end
 
-    def header_links
-      Hicube::Page.parents
-    end
+    # def header_links
+    #   Hicube::Page.parents
+    # end
 
     def snippet_render(name)
       snippet = Hicube::Snippet.find_by(name: name)

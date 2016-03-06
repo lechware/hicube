@@ -49,8 +49,12 @@ module Hicube
       f.write ::Liquid::Template.parse(@page.body).render
       f.close
 
-      @page_content = ::Slim::Template.new(filename).render Object.new, links: Hicube::Page.parents.map(&:slug), documents: Hicube::Document.all, id: @page.slug
-  
+      @page_content = ::Slim::Template.new(filename).render (Object.new, 
+        links: Hicube::Page.parents.map(&:slug), 
+        header_links: Hicube::Page.parents.headers.map(&:slug),
+        footer_links: Hicube::Page.parents.footers.map(&:slug),
+        documents: Hicube::Document.all, id: @page.slug
+      )
     end
 
     private
