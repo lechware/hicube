@@ -46,7 +46,7 @@ module Hicube
     # Order for links
     field :od, type: Integer,
       as:             :order,
-      default:        0
+      default:        10
 
     # field :jt, type: Boolean, # Saving as String, so don't have to do transalation from String to Boolean in controller
     #   as:             :junction,
@@ -70,7 +70,7 @@ module Hicube
     # Scopes
     #
     default_scope -> { ne(_slugs: ["index"]) }
-    scope :parents, -> { where(parent: nil) }
+    scope :parents, -> { where(parent: nil).asc(:order) }
     scope :headers, -> { where(header: true).asc(:order) }
     scope :footers, -> { where(footer: true).asc(:order) }
     # scope :children, -> (parent) {where(parent: parent)}

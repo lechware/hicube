@@ -1,7 +1,7 @@
 class GenerateHicubePages < Mongoid::Migration
   def self.up
     puts "Creating Hicube Index Page"
-    Hicube::Page.create!(account: Hicube::Account.first, title: 'Index', body: "body\n\tb This is index page")
+    Hicube::Page.create!(account: Hicube::Account.first, title: 'Index', order: 0, body: "body\n\tb This is index page")
   end
 
   def self.down

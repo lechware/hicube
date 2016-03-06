@@ -27,7 +27,7 @@
 
 $(function () {
   $('input').iCheck({
-    checkboxClass: 'icheckbox_square-blue',
+    checkboxClass: 'icheckbox_minimal-blue',
     radioClass: 'iradio_flat-blue',
     increaseArea: '20%' // optional
   });
