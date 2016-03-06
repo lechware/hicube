@@ -97,10 +97,10 @@
               = f.text_field :title, placeholder: 'Enter ...', disabled: (@page.index? rescue false), class: 'form-control'
             .col-xs-3
               = f.label :parent
-              = f.collection_select :parent, Hicube::Page.parents,:id,:title,{include_blank: '', selected: parent_id},{class: 'form-control', disabled: (@page.title.eql?('Index') rescue false)}
+              = f.collection_select :parent, Hicube::Page.parents,:id,:title,{include_blank: '', selected: parent_id},{class: 'form-control', disabled: (@page.index? rescue false)}
             .col-xs-2
               = f.label :link_order
-              = f.select :order, 1..Hicube::Page.count, {disabled: (@page.index? rescue false)}, {class: 'form-control'}
+              = f.select :order, 1..Hicube::Page.count, {}, {disabled: (@page.index? rescue false), class: 'form-control'}
             .col-xs-2
               .checkbox.iCheck style="padding-top: 10px;"
               label= f.check_box :header, class: 'minimal'
