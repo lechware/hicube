@@ -15,7 +15,8 @@
 
  * Adminlte and corresponding css
  *= require adminlte
- * require skin-blue
+ * Adminlte gem does not seem to ship with skins so copied it manually into gem
+ *= require skin-blue
 
 
  *= require_tree .
