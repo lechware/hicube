@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    hicube (0.0.3)
+    hicube (0.0.4)
       bootstrap-editable-rails
       bootstrap-wysihtml5-rails
       carrierwave-aws
