@@ -1,1 +1,1 @@
-Rails.application.config.assets.precompile += %w( icheck/minimal/blue.png icheck/minimal/blue@2x.png admin-lte.css skin-blue.css admin-lte.js )
+Rails.application.config.assets.precompile += %w( icheck/minimal/blue.png icheck/minimal/blue@2x.png vendor/assets/stylesheets/admin-lte.css vendor/assets/stylesheets/skin-blue.css vendor/assets/stylesheets/admin-lte.js )
