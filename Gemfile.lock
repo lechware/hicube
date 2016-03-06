@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    hicube (0.0.10)
+    hicube (0.0.11)
       adminlte
       bootstrap-editable-rails
       bootstrap-wysihtml5-rails
