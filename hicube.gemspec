@@ -18,6 +18,8 @@ Gem::Specification.new do |s|
 
   s.add_dependency "rails", "~> 4.2.0"
 
+  s.add_dependency "adminlte"
+  
   # For inline editing
   s.add_dependency "bootstrap-editable-rails"
 

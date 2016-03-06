@@ -1,1 +1,1 @@
-Rails.application.config.assets.precompile += %w( icheck/minimal/blue.png icheck/minimal/blue@2x.png )
+Rails.application.config.assets.precompile += %w( icheck/minimal/blue.png icheck/minimal/blue@2x.png avatar.png )

@@ -1,3 +1,4 @@
+require 'adminlte'
 require 'devise'
 require 'liquid'
 require 'carrierwave-aws'

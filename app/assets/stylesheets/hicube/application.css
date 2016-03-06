@@ -14,8 +14,10 @@
  *= require codemirror
 
  * Adminlte and corresponding css
- *= require admin-lte
- *= require skin-blue
+ *= require adminlte
+ * require skin-blue
+
+
  *= require_tree .
  *= require_self
  */

@@ -22,7 +22,8 @@
 //= require codemirror/addons/selection/active-line
 
 // Adminlte and corresponding Plugins
-//= require admin-lte
+//= require adminlte
+
 //= require_tree .
 
 $(function () {
