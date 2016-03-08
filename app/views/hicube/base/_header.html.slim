@@ -23,9 +23,26 @@ header.main-header
                 small
                   | Member since #{current_user.created_at}
             li.user-footer
-              / .pull-left
-              /   a.btn.btn-default.btn-flat href=new_users_program_path
-              /     | Profile
+              - if current_user.admin?
+                .pull-left
+                  - unless Hicube::Account.count > 1
+                    = link_to 'New Site', new_account_path, class: 'btn btn-flat btn-default'
+
               .pull-right
                 = link_to destroy_user_session_path, method: :delete, class: 'btn btn-default btn-flat'
                   | Sign out
+        - if current_user.admin? && Hicube::Account.count > 1
+          li.dropdown.notifications-menu
+            a.dropdown-toggle href="#" data-toggle="dropdown" aria-expanded="false"
+              i.fa.fa-gears
+            ul.dropdown-menu
+              li.header
+                | You have #{Hicube::Account.count} sites
+              li
+                ul.menu
+                  - Hicube::Account.each do |a|
+                    - unless a == current_account
+                      li
+                        a[href="http://#{a.domain}/hicube/pages/index/edit"]
+                          i.fa.fa-sitemap
+                          |  #{truncate(a.domain, length: 35, omission: '...')}

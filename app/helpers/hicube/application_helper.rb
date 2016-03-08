@@ -57,10 +57,6 @@ module Hicube
       '/'
     end
 
-    # def header_links
-    #   Hicube::Page.parents
-    # end
-
     def snippet_render(name)
       snippet = Hicube::Snippet.find_by(name: name)
       raw "#{Hicube::Markdown.render(::Liquid::Template.parse(snippet.body).render).html_safe}"

@@ -22,6 +22,7 @@ module Hicube
     def create
       logger.debug "Creating snippet with #{params}"
       @snippet = Hicube::Snippet.new snippet_params
+      @snippet.account = current_account
       @snippet.save!
     
       respond_to do |format|

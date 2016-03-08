@@ -23,12 +23,14 @@ module Hicube
       @account = Hicube::Account.new(accounts_params)
       @account.save!
 
+      Hicube::Page.create!(title: 'Index', body: 'Add Content here', account: @account, order: 0)
+
       respond_to do |format|
         notify :notice, ::I18n.t('messages.resource.created',
           :type       => Hicube::Account.model_name.human,
           :resource   => @account
         )
-        format.html { redirect_to action: :show, id: @account }
+        format.html { redirect_to ('http://' + @account.domain + '/hicube/pages/index/edit'), status: '301' }
       end
     rescue Mongoid::Errors::Validations => e
       respond_to do |format|

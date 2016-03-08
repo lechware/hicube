@@ -4,9 +4,12 @@ module Hicube
     include Mongoid::Document
     include Mongoid::Timestamps
 
+    # Associations
     #
-    # Constant
-    #
+    has_many :pages, class_name: 'Hicube::Page'
+    has_many :snippets, class_name: 'Hicube::Snippet'
+    has_many :documents, class_name: 'Hicube::Document'
+    has_many :tags, class_name: 'Hicube::Document'
 
     #
     # Fields
@@ -20,7 +23,7 @@ module Hicube
     field :domain, type: String
 
     validates_presence_of :ga, :domain #, :notify_email_html, :notify_email_text
-
+    validates_uniqueness_of :domain
 
   end
 end

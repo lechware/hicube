@@ -6,11 +6,16 @@ module Hicube
     before_action :authenticate_user!, except: [:show, :mail]
     before_filter :initialise_current_user, except: [:show]
 
+    helper_method :current_account
+
     def initialise_current_user
       return unless user_signed_in?
       User.current = current_user
     end
 
+    def current_account
+      Hicube::Account.find_by(domain: request.host_with_port)
+    end
 
     def permit_resource_params
       resource = controller_name.singularize.to_sym
@@ -53,8 +58,13 @@ module Hicube
       # Determine the class based on the resource name if not provided.
       # FIXME: Do not hard code engine name 
       resource_class = options[:class] || "Hicube::#{resource_name.singularize.camelize}".classify.constantize
+      # resource = resource_class.unscoped.find((params.has_key?(:id) ? params[:id] : 'index'))
+      resource = if params.has_key?(:id)
+        current_account.pages.unscoped.find(params[:id])
+      else
+        current_account.pages.unscoped.first
+      end
 
-      resource = resource_class.unscoped.find((params.has_key?(:id) ? params[:id] : 'index'))
 
       # # Confirm current user has permission to view resource.
       # unless resource.account == current_account
@@ -75,7 +85,7 @@ module Hicube
         :criteria => resource_class.human_attribute_name(:id),
         :value    => params[:id]
       )
-      redirect_to :action => :index
+      redirect_to '/404.html'
     end
 
     # Load all relevant resources based on the current controller name.

@@ -8,8 +8,10 @@ module Hicube
     before_filter :initialise_current_user
 
     # around_filter :audit_trail
+    helper_method :current_account
 
     # layout 'application'
+
 
     #
     # Private Instance Methods
@@ -21,9 +23,9 @@ module Hicube
       User.current = current_user
     end
 
-    # def current_account
-    #   User.current.account
-    # end
+    def current_account
+      Hicube::Account.find_by(domain: request.host_with_port)
+    end
 
     # Check resource params are present based on the current controller name.
     def check_resource_params(options = {})
@@ -62,10 +64,12 @@ module Hicube
       # FIXME: Do not hard code engine name 
       resource_class = options[:class] || "Hicube::#{resource_name.singularize.camelize}".classify.constantize
 
-      if resource_class == Hicube::Account
-        resource = Hicube::Account.first
+      resource = if resource_class == Hicube::Account
+        # resource = Hicube::Account.first
+        current_account
       else
-        resource = resource_class.unscoped.find(params[:id])
+        # resource = resource_class.unscoped.find(params[:id])
+        resource_class.unscoped.where(account: current_account).find(params[:id])
       end
       # # Confirm current user has permission to view resource.
       # unless resource.account == current_account
@@ -97,7 +101,7 @@ module Hicube
 
       # Set an instance variable @name to contain the names for this user.
       #FIXME: Do not hard code Hicube here
-      instance_variable_set("@#{resource_name}", "Hicube::#{resource_name.singularize.camelize}".classify.constantize.unscoped.all)
+      instance_variable_set("@#{resource_name}", "Hicube::#{resource_name.singularize.camelize}".classify.constantize.unscoped.where(account: current_account).all)
     end
 
     # def setup_account!

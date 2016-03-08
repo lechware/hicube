@@ -22,6 +22,7 @@ module Hicube
     def create
       logger.debug "Creating page with #{params}"
       @page = Hicube::Page.new page_params
+      @page.account = current_account
       @page.seo_title = "#{app_name} - #{@page.title}" if (@page.seo_title.nil? or @page.seo_title.empty?)
       @page.save!
 

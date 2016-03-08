@@ -28,7 +28,7 @@ section.sidebar
         /   a href=pages_path
         /     i.fa.fa-angle-double-right
         /     = t 'All'
-        - Hicube::Page.unscoped.parents.each do |p|
+        - current_account.pages.unscoped.parents.each do |p|
           - unless p.junction?
             li class=(sidebar_class(:edit, :page, p) || sidebar_class(:show, :page, p))
               a href=edit_page_path(p)
@@ -72,7 +72,7 @@ section.sidebar
         /   a href=snippets_path
         /     i.fa.fa-angle-double-right
         /     = t 'list'
-        - Hicube::Snippet.each do |s|
+        - current_account.snippets.each do |s|
           li class=(sidebar_class(:edit, :snippet, s) || sidebar_class(:show, :snippet, s))
             a href=edit_snippet_path(s)
               i.fa.fa-angle-double-right

@@ -5,18 +5,8 @@ module Hicube
     before_action :load_resource, except: [:mail]
 
     def show
-      filename = "#{Rails.root}/tmp/#{@page}_#{Process.pid}.slim"
-      
-      f = File.new(filename, "w+")
-      f.write ::Liquid::Template.parse(@page.body).render
-      f.close
+      fetch_page
 
-      @page_content = ::Slim::Template.new(filename).render(Object.new, 
-        links: Hicube::Page.parents.map(&:slug), 
-        header_links: Hicube::Page.parents.headers.map(&:slug),
-        footer_links: Hicube::Page.parents.footers.map(&:slug),
-        documents: Hicube::Document.all, id: @page.slug
-      )
     rescue Exception => e
       logger.error "Error: Rendering #{@page} failed."
       logger.error e
@@ -43,6 +33,16 @@ module Hicube
     end
 
     def edit
+      fetch_page
+    end
+
+    private
+
+    def page_params
+      params.require(:page).permit(:subject, :name, :reply_to, :phone, :message)
+    end
+
+    def fetch_page
       filename = "#{Rails.root}/tmp/#{@page}_#{Process.pid}.slim"
       
       f = File.new(filename, "w+")
@@ -55,12 +55,6 @@ module Hicube
         footer_links: Hicube::Page.parents.footers.map(&:slug),
         documents: Hicube::Document.all, id: @page.slug
       )
-    end
-
-    private
-
-    def page_params
-      params.require(:page).permit(:subject, :name, :reply_to, :phone, :message)
     end
   end
 end

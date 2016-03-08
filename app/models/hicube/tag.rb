@@ -7,6 +7,7 @@ module Hicube
     #
     # Relations
     #
+    belongs_to :account, class_name: 'Hicube::Account'
     has_and_belongs_to_many :documents, class_name: 'Hicube::Document'
 
     field :n, type: String,

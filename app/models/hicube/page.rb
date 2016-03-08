@@ -6,7 +6,7 @@ module Hicube
     include Mongoid::Slug
 
     # Slugs
-    slug              :title
+    slug              :title, scope: :account_id
 
     # Associations
     belongs_to :account, class_name: 'Hicube::Account'
@@ -15,6 +15,13 @@ module Hicube
     embeds_many :content, class_name: 'Hicube::Content'
     
     accepts_nested_attributes_for :content, allow_destroy: true
+
+    # Page cannot be parent to itself
+    before_save do |page|
+      unless page.parent.nil? || page.parent.blank?
+        return false if page.parent == page
+      end
+    end
 
     # Callback to see if trying to delete index page
     before_destroy do |page|
@@ -64,7 +71,7 @@ module Hicube
 
     # Validations
     validates_presence_of :title, :header, :footer, :order
-    validates_uniqueness_of :title, scope: :parent
+    validates_uniqueness_of :title, scope: [:parent, :account]
 
     #
     # Scopes

@@ -4,6 +4,9 @@ module Hicube
     include Mongoid::Document
     include Mongoid::Timestamps
 
+    # Association
+    belongs_to :account, class_name: 'Hicube::Account'
+
     field :name, type: String
 
     field :bd, type: String,
