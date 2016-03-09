@@ -9,7 +9,7 @@ module Hicube
     has_many :pages, class_name: 'Hicube::Page'
     has_many :snippets, class_name: 'Hicube::Snippet'
     has_many :documents, class_name: 'Hicube::Document'
-    has_many :tags, class_name: 'Hicube::Document'
+    has_many :tags, class_name: 'Hicube::Tag'
 
     #
     # Fields

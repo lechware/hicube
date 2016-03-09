@@ -44,9 +44,11 @@ module Hicube
 
     def fetch_page
       filename = "#{Rails.root}/tmp/#{@page}_#{Process.pid}.slim"
+      data = Hash.new
+      data['account'] = @page.account.id.to_s
       
       f = File.new(filename, "w+")
-      f.write ::Liquid::Template.parse(@page.body).render
+      f.write ::Liquid::Template.parse(@page.body).render data
       f.close
 
       @page_content = ::Slim::Template.new(filename).render(Object.new, 

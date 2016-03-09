@@ -3,33 +3,24 @@ module Hicube
     module Tags
       class SnippetTag < ::Liquid::Tag
 
-        # Convention for snippet is 
-        # Variable[0] - snippet name
-        # Variable[odd] - Name of liquid variable
-        # Variable[even] - Value of liquid variable
-
         def initialize(tag_name, variables, tokens)
           @variables = variables.split(" ")
-          @snippet = Hicube::Snippet.find_by(name: @variables[0])
+          @snippet_name = @variables[0]
           super
         rescue
         end
 
         def render(context)
-          unless @snippet.nil?
-            ::Liquid::Template.parse(@snippet.body).render # @snippet.body
-            # @template = ::Liquid::Template.parse(@snippet.body)
-            # if @variables.length > 1
-            #   @template.render @variables[1] => context[@variables[2].strip]
-
-            #   # FIXME: Handle passing more than one variable
-              
-            # else
-            #   @template.render
-            # end
+          unless @snippet_name.nil?
+            puts "Context/Account is #{context['account']}"
+            
+            @snippet = Hicube::Snippet.find_by(name: @snippet_name, account: context['account'])
+            ::Liquid::Template.parse(@snippet.body).render
           else
-            "snippet_not_found"
+            "snippet_not_found for name #{name} and #{context['account']}"
           end
+        rescue
+          "snippet_not_found for name #{name} and #{context['account']}"
         end
       end
 

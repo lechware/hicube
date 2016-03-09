@@ -21,8 +21,9 @@ module Hicube
 
     def create
       @document = Document.new document_params.except(:tags)
+      @document.account = current_account
       document_params[:tags].split(' ').each do |s|
-        @document.tags << Hicube::Tag.find_or_create_by(name: s)
+        @document.tags << Hicube::Tag.find_or_create_by(name: s, account: current_account)
       end
 
       @document.save!
@@ -62,7 +63,7 @@ module Hicube
       
       @document.tags = nil
       params[:document][:tags].split(' ').each do |s|
-        @document.tags << Hicube::Tag.find_or_create_by(name: s)
+        @document.tags << Hicube::Tag.find_or_create_by(name: s, account: current_account)
       end
 
       @document.save!
